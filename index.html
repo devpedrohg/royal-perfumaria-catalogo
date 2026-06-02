@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Perfumaria</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topo">
+  <div class="logo">
+    <img src="logo-royal.png" alt="Royal Perfumaria">
+  </div>
+
+  <nav class="menu">
+    <a href="#">Início</a>
+    <a href="#">Masculinos</a>
+    <a href="#">Femininos</a>
+    <a href="#">Promoções</a>
+    </nav>
+
+  <div class="icones">
+
+    <a href="#" class="top-icon" aria-label="Buscar">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </a>
+
+    <a href="https://instagram.com/royalperfumaria" target="_blank" class="top-icon" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+
+<div class="icone-carrinho">
+
+    <button class="btn-carrinho">
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24">
+
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+
+        </svg>
+
+    </button>
+
+    <div class="dropdown-carrinho">
+
+        <h3>Seu Carrinho</h3>
+
+        <div class="item-carrinho">
+
+            <img src="produto.jpg" alt="Perfume">
+
+            <div>
+
+                <p>Asad Lattafa</p>
+                <span>R$ 189,90</span>
+
+            </div>
+
+        </div>
+
+        <a href="#" class="btn-finalizar">
+            FINALIZAR PEDIDO
+        </a>
+
+    </div>
+
+</div>
+  </header>
+
+<section class="cep-bar">
+  <div class="cep-info">
+    <span class="cep-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 7h11v9H3z"></path>
+        <path d="M14 10h4l3 3v3h-7z"></path>
+        <circle cx="7" cy="18" r="2"></circle>
+        <circle cx="17" cy="18" r="2"></circle>
+        <path d="M9 18h6"></path>
+      </svg>
+    </span>
+
+    <div>
+      <small>Enviar para</small>
+      <strong id="cepTexto">Informe seu CEP</strong>
+    </div>
+  </div>
+
+  <div class="cep-form">
+    <input type="text" id="cepInput" placeholder="Digite seu CEP">
+    <button onclick="salvarCep()">Confirmar</button>
+  </div>
+</section>
+
+<section class="hero-slider">
+
+  <button class="slide-btn prev" onclick="mudarSlide(-1)">‹</button>
+
+  <div class="slide ativo">
+    <img src="b1.png" alt="Royal Perfumaria">
+
+  </div><div class="slide-texto">
+
+  <span>BEM-VINDO À</span>
+
+  <p>
+    Descubra fragrâncias marcantes,
+    sofisticadas e exclusivas.
+  </p>
+
+  <div class="botoes">
+    <a href="#produtos" class="btn-catalogo">
+    VER CATÁLOGO
+</a>
+  </div>
+
+</div>
+
+</section>
+
+<section class="produtos" id="produtos">
+  <h2>Mais Vendidos</h2>
+
+  <div class="grid-produtos">
+
+    <div class="card">
+      <img src="img/yara.png" alt="Yara Lattafa">
+      <h3>Yara Lattafa</h3>
+      <p>Feminino • 100ml</p>
+      <strong>R$ 189,90</strong>
+      <button>Comprar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/club.png" alt="Club de Nuit">
+      <h3>Club de Nuit Intense</h3>
+      <p>Masculino • 105ml</p>
+      <strong>R$ 249,90</strong>
+      <button>Comprar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/asad.png" alt="Asad Lattafa">
+      <h3>Asad Lattafa</h3>
+      <p>Masculino • 100ml</p>
+      <strong>R$ 189,90</strong>
+      <button>Comprar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/lavie.png" alt="La Vie Est Belle">
+      <h3>La Vie Est Belle</h3>
+      <p>Feminino • 100ml</p>
+      <strong>R$ 499,90</strong>
+      <button>Comprar</button>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Royal Perfumaria. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+  let slideAtual = 0;
+
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+
+  function mostrarSlide(index) {
+    slides.forEach(slide => slide.classList.remove("ativo"));
+    dots.forEach(dot => dot.classList.remove("ativo"));
+
+    slides[index].classList.add("ativo");
+    dots[index].classList.add("ativo");
+  }
+
+  function mudarSlide(direcao) {
+    slideAtual += direcao;
+
+    if (slideAtual < 0) {
+      slideAtual = slides.length - 1;
+    }
+
+    if (slideAtual >= slides.length) {
+      slideAtual = 0;
+    }
+
+    mostrarSlide(slideAtual);
+  }
+
+  function irParaSlide(index) {
+    slideAtual = index;
+    mostrarSlide(slideAtual);
+  }
+
+  setInterval(() => {
+    mudarSlide(1);
+  }, 5000);
+
+  function salvarCep() {
+    const cepInput = document.getElementById("cepInput");
+    const cepTexto = document.getElementById("cepTexto");
+
+    if (cepInput.value.trim() === "") {
+      alert("Digite um CEP válido.");
+      return;
+    }
+
+    cepTexto.textContent = cepInput.value;
+  }
+</script>
+
+</body>
+</html>

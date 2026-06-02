@@ -1,0 +1,3202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Catálogo | Royal Perfumaria</title>
+
+<link rel="stylesheet" href="catalogo.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="topo">
+
+    <a href="index.html" class="logo">
+        <img src="logo-royal.png" alt="Royal Perfumaria">
+    </a>
+
+    <nav class="menu">
+
+        <a href="index.html">Início</a>
+        <a href="#">Masculinos</a>
+        <a href="#">Femininos</a>
+        <a href="#">Promoções</a>
+
+    </nav>
+
+    <div class="icones-topo">
+
+        <!-- PESQUISA -->
+
+        <a href="#" class="icone-topo">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.8"
+            stroke="currentColor">
+
+                <path stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6 6a7.5 7.5 0 0 0 10.65 10.65Z"/>
+
+            </svg>
+
+        </a>
+
+        <!-- INSTAGRAM -->
+
+        <a href="https://instagram.com/royalperfumaria"
+        target="_blank"
+        class="icone-topo">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.8"
+            stroke="currentColor">
+
+                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+
+                <circle cx="12" cy="12" r="4"></circle>
+
+                <circle cx="17.5" cy="6.5" r="1"></circle>
+
+            </svg>
+
+        </a>
+
+        <!-- CARRINHO -->
+
+        <div class="icone-carrinho">
+
+            <button class="icone-topo btn-carrinho">
+            
+             <span class="contador-carrinho">0</span>
+             
+                <svg xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.8"
+                stroke="currentColor">
+
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+
+                </svg>
+
+            </button>
+
+    <div class="dropdown-carrinho">
+
+    <h3>Seu Carrinho</h3>
+
+    <p>Carrinho vazio.</p>
+
+</div>
+</div>
+
+</header>
+
+    <section class="catalogo">
+
+        <div class="titulo-catalogo">
+
+            <span>ROYAL PERFUMARIA</span>
+
+            <h1>Catálogo Premium</h1>
+
+            <p>Descubra fragrâncias marcantes, sofisticadas e exclusivas.</p>
+
+        </div>
+
+        <div class="controles-catalogo">
+
+    <div class="campo-busca-catalogo">
+        <input type="text" id="campoBusca" placeholder="Buscar produto...">
+        <button id="btnBuscar">Buscar</button>
+    </div>
+
+    <div class="linha-filtros">
+
+        <div class="filtros-categorias">
+            <button class="filtro ativo" data-categoria="todos">Todos</button>
+            <button class="filtro" data-categoria="feminino">Femininos</button>
+            <button class="filtro" data-categoria="masculino">Masculinos</button>
+            <button class="filtro" data-categoria="body-splash">Body Splash</button>
+            <button class="filtro" data-categoria="creme-corporal">Cremes</button>
+            <button class="filtro" data-categoria="spray">Sprays</button>
+            <button class="filtro" data-categoria="unissex">Unissex</button>
+        </div>
+
+        <select id="ordenarProdutos">
+            <option value="padrao">Ordenar</option>
+            <option value="menor-preco">Menor preço</option>
+            <option value="maior-preco">Maior preço</option>
+            <option value="az">A-Z</option>
+            <option value="za">Z-A</option>
+        </select>
+        
+    </div>
+
+    <p id="quantidadeProdutos">
+         todos os produtos</p>
+
+<div class="grid-produtos">
+
+    <!-- CARD 1 -->
+<div class="card-produto" data-categoria="feminino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/yara-lattafa.png" alt="Yara Lattafa">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Yara Lattafa</h3>
+
+        <span class="categoria">
+            Feminino • 100ml
+        </span>
+
+        <div class="preco">
+            R$ 249,99
+        </div>
+
+    </div>
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+</div>
+
+<!-- CARD 2 -->
+<div class="card-produto" data-categoria="feminino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/dalal-lattafa.png" alt="Dalal Lattafa">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Dalal Lattafa</h3>
+
+        <span class="categoria">
+            Feminino • Eau de Parfum
+        </span>
+
+        <div class="preco">
+            R$ 369,90
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- CARD 3 -->
+<div class="card-produto" data-categoria="feminino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/delilah.png" alt="Delilah Maison Alhambra">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Delilah Maison Alhambra</h3>
+
+        <span class="categoria">
+            Feminino • Floral
+        </span>
+
+        <div class="preco">
+            R$ 249,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- CARD 4 -->
+<div class="card-produto" data-categoria="feminino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/la-belle-arqus.png" alt="La Belle Arqus">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>La Belle Arqus</h3>
+
+        <span class="categoria">
+            Feminino • Eau de Parfum
+        </span>
+
+        <div class="preco">
+            R$ 249,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 16 -->
+<div class="card-produto" data-categoria="masculino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/al-noble.png" alt="Al Noble">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Al Noble Ameer</h3>
+
+        <span class="categoria">
+            Masculino • Oriental
+        </span>
+
+        <div class="preco">
+            R$ 209,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 17 -->
+<div class="card-produto" data-categoria="masculino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/alpine.png" alt="Alpine Homme">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Alpine Homme Sport</h3>
+
+        <span class="categoria">
+            Masculino • Maison Alhambra
+        </span>
+
+        <div class="preco">
+            R$ 279,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 18 -->
+<div class="card-produto" data-categoria="masculino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/badee.png" alt="Badee Al Oud">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Badee Al Oud</h3>
+
+        <span class="categoria">
+            Masculino • Lattafa
+        </span>
+
+        <div class="preco">
+            R$ 349,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 19 -->
+<div class="card-produto" data-categoria="body-splash">
+
+    <div class="imagem-produto">
+        <img src="../imagens/body-isabelle.png" alt="Body Isabelle">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Body Splash Isabelle</h3>
+
+        <span class="categoria">
+            Body Splash FEM
+        </span>
+
+        <div class="preco">
+            R$ 149,00
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 20 -->
+<div class="card-produto" data-categoria="spray">
+
+    <div class="imagem-produto">
+        <img src="../imagens/blue-blood.png" alt="Blue Blood">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Perfume Spray Blue Blood</h3>
+
+        <span class="categoria">
+            Spray Masculino • 200ml
+        </span>
+
+        <div class="preco">
+            R$ 54,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+<!-- 21 -->
+<div class="card-produto" data-categoria="masculino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/club-intense.png"
+        alt="Club Intense">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Club de Nuit Intense</h3>
+
+        <span class="categoria">
+            Masculino • Eau de Toilette
+        </span>
+
+        <div class="preco">
+            R$ 349,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 22 -->
+<div class="card-produto" data-categoria="masculino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/salvo.png"
+        alt="Salvo">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Salvo Maison Alhambra</h3>
+
+        <span class="categoria">
+            Masculino • 100ml
+        </span>
+
+        <div class="preco">
+            R$ 199,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 23 -->
+<div class="card-produto" data-categoria="masculino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/fakhar-gold.png"
+        alt="Fakhar Gold">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Fakhar Gold</h3>
+
+        <span class="categoria">
+            Masculino • Lattafa
+        </span>
+
+        <div class="preco">
+            R$ 259,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 24 -->
+<div class="card-produto" data-categoria="masculino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/oud-khususi.png"
+        alt="Oud Khususi">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Oud Khususi</h3>
+
+        <span class="categoria">
+            Masculino • Árabe
+        </span>
+
+        <div class="preco">
+            R$ 249,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 25 -->
+<div class="card-produto" data-categoria="unissex">
+
+    <div class="imagem-produto">
+        <img src="../imagens/honor-glory.png"
+        alt="Honor Glory">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Honor & Glory</h3>
+
+        <span class="categoria">
+            Unissex • Badee Al Oud
+        </span>
+
+        <div class="preco">
+            R$ 389,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 26 -->
+<div class="card-produto" data-categoria="unissex">
+
+    <div class="imagem-produto">
+        <img src="../imagens/ana-abiyedh.png"
+        alt="Ana Abiyedh">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Ana Abiyedh</h3>
+
+        <span class="categoria">
+            Unissex • Lattafa
+        </span>
+
+        <div class="preco">
+            R$ 199,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 27 -->
+<div class="card-produto" data-categoria="feminino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/pink-shimmer.png"
+        alt="Pink Shimmer">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Pink Shimmer Secret</h3>
+
+        <span class="categoria">
+            Feminino • Body Splash
+        </span>
+
+        <div class="preco">
+            R$ 99,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 28 -->
+<div class="card-produto" data-categoria="feminino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/manaal.png"
+        alt="Manaal">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Manaal Zaafaran</h3>
+
+        <span class="categoria">
+            Feminino • Oriental
+        </span>
+
+        <div class="preco">
+            R$ 299,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 29 -->
+<div class="card-produto" data-categoria="feminino">
+
+    <div class="imagem-produto">
+        <img src="../imagens/badee-mini.png"
+        alt="Kit Badee">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Kit Badee Al Oud Mini</h3>
+
+        <span class="categoria">
+            Feminino • Kit
+        </span>
+
+        <div class="preco">
+            R$ 219,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- 30 -->
+<div class="card-produto" data-categoria="creme-corporal">
+
+    <div class="imagem-produto">
+        <img src="../imagens/creme-angel.png"
+        alt="Creme Angel">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Creme Angel</h3>
+
+        <span class="categoria">
+            Creme Corporal • 200ml
+        </span>
+
+        <div class="preco">
+            R$ 179,00
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+
+</div>
+<!-- 31 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/club-women.png" alt="Club Women">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Club de Nuit Women</h3>
+
+        <span class="categoria">
+            Feminino • Eau de Parfum
+        </span>
+
+        <div class="preco">
+            R$ 389,00
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+
+<!-- 32 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/blue-blood.png" alt="Blue Blood">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Blue Blood</h3>
+
+        <span class="categoria">
+            Masculino • Spray
+        </span>
+
+        <div class="preco">
+            R$ 54,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+
+<!-- 33 -->
+<div class="card-produto" data-categoria="spray">
+    <div class="imagem-produto">
+        <img src="../imagens/high-spirited.png" alt="High Spirited">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>High Spirited</h3>
+
+        <span class="categoria">
+            Spray Masculino
+        </span>
+
+        <div class="preco">
+            R$ 54,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+
+<!-- 34 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/isabelle.png" alt="Isabelle">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Isabelle La Belle</h3>
+
+        <span class="categoria">
+            Body Splash FEM
+        </span>
+
+        <div class="preco">
+            R$ 149,00
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+
+<!-- 35 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/sabah-body.png" alt="Sabah Body">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Sabah Body Splash</h3>
+
+        <span class="categoria">
+            Body Splash FEM
+        </span>
+
+        <div class="preco">
+            R$ 149,00
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+
+<!-- 36 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/rayhaan.png" alt="Rayhaan">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Rayhaan Dahliya</h3>
+
+        <span class="categoria">
+            Feminino • Floral
+        </span>
+
+        <div class="preco">
+            R$ 299,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+
+<!-- 37 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/iconic.png" alt="Iconic">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Club de Nuit Iconic</h3>
+
+        <span class="categoria">
+            Masculino • Eau de Parfum
+        </span>
+
+        <div class="preco">
+            R$ 399,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+
+<!-- 38 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/asad.png" alt="Asad">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Asad Lattafa</h3>
+
+        <span class="categoria">
+            Masculino • Lattafa
+        </span>
+
+        <div class="preco">
+            R$ 259,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+
+<!-- 39 -->
+<div class="card-produto" data-categoria="unissex">
+    <div class="imagem-produto">
+        <img src="../imagens/oud.png" alt="Oud">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Oud Collection</h3>
+
+        <span class="categoria">
+            Unissex • Árabe
+        </span>
+
+        <div class="preco">
+            R$ 329,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+
+<!-- 40 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/rose.png" alt="Rose">
+    </div>
+
+    <div class="info-produto">
+
+        <h3>Rose Seduction</h3>
+
+        <span class="categoria">
+            Feminino • Floral
+        </span>
+
+        <div class="preco">
+            R$ 219,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+
+    </div>
+</div>
+<!-- 41 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/pride-nebras.png" alt="Pride Nebras">
+    </div>
+
+    <div class="info-produto">
+        <h3>Pride Nebras</h3>
+
+        <span class="categoria">
+            Feminino • Gourmand
+        </span>
+
+        <div class="preco">
+            R$ 359,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 42 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/armaf-hunter.png" alt="Hunter">
+    </div>
+
+    <div class="info-produto">
+        <h3>Armaf Hunter</h3>
+
+        <span class="categoria">
+            Masculino • Eau de Toilette
+        </span>
+
+        <div class="preco">
+            R$ 289,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 43 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/9am.png" alt="9AM">
+    </div>
+
+    <div class="info-produto">
+        <h3>Afnan 9AM</h3>
+
+        <span class="categoria">
+            Masculino • Fresh
+        </span>
+
+        <div class="preco">
+            R$ 329,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 44 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/body-luxury.png" alt="Luxury Splash">
+    </div>
+
+    <div class="info-produto">
+        <h3>Luxury Body Splash</h3>
+
+        <span class="categoria">
+            Body Splash • 250ml
+        </span>
+
+        <div class="preco">
+            R$ 139,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 45 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/yara-moi.png" alt="Yara Moi">
+    </div>
+
+    <div class="info-produto">
+        <h3>Yara Moi</h3>
+
+        <span class="categoria">
+            Feminino • Lattafa
+        </span>
+
+        <div class="preco">
+            R$ 289,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 46 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/fakhar-silver.png" alt="Fakhar Silver">
+    </div>
+
+    <div class="info-produto">
+        <h3>Fakhar Silver</h3>
+
+        <span class="categoria">
+            Masculino • Lattafa
+        </span>
+
+        <div class="preco">
+            R$ 259,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 47 -->
+<div class="card-produto" data-categoria="unissex">
+    <div class="imagem-produto">
+        <img src="../imagens/oud-mood.png" alt="Oud Mood">
+    </div>
+
+    <div class="info-produto">
+        <h3>Oud Mood</h3>
+
+        <span class="categoria">
+            Unissex • Oud
+        </span>
+
+        <div class="preco">
+            R$ 239,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 48 -->
+<div class="card-produto" data-categoria="spray">
+    <div class="imagem-produto">
+        <img src="../imagens/gold-spray.png" alt="Gold Spray">
+    </div>
+
+    <div class="info-produto">
+        <h3>Gold Spray</h3>
+
+        <span class="categoria">
+            Spray Corpo e Cabelo
+        </span>
+
+        <div class="preco">
+            R$ 59,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 49 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/love-rose.png" alt="Love Rose">
+    </div>
+
+    <div class="info-produto">
+        <h3>Love Rose</h3>
+
+        <span class="categoria">
+            Feminino • Floral Rosado
+        </span>
+
+        <div class="preco">
+            R$ 199,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+<!-- 50 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/alpine-blue.png" alt="Alpine Blue">
+    </div>
+
+    <div class="info-produto">
+        <h3>Alpine Blue</h3>
+
+        <span class="categoria">
+            Masculino • Fresh
+        </span>
+
+        <div class="preco">
+            R$ 239,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 51 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/pink-rose.png" alt="Pink Rose">
+    </div>
+
+    <div class="info-produto">
+        <h3>Pink Rose</h3>
+
+        <span class="categoria">
+            Feminino • Floral
+        </span>
+
+        <div class="preco">
+            R$ 189,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 52 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/luxury-body.png" alt="Luxury Body">
+    </div>
+
+    <div class="info-produto">
+        <h3>Luxury Body</h3>
+
+        <span class="categoria">
+            Body Splash
+        </span>
+
+        <div class="preco">
+            R$ 129,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 53 -->
+<div class="card-produto" data-categoria="unissex">
+    <div class="imagem-produto">
+        <img src="../imagens/oud-night.png" alt="Oud Night">
+    </div>
+
+    <div class="info-produto">
+        <h3>Oud Night</h3>
+
+        <span class="categoria">
+            Unissex • Oud
+        </span>
+
+        <div class="preco">
+            R$ 289,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 54 -->
+<div class="card-produto" data-categoria="spray">
+    <div class="imagem-produto">
+        <img src="../imagens/silver-spray.png" alt="Silver Spray">
+    </div>
+
+    <div class="info-produto">
+        <h3>Silver Spray</h3>
+
+        <span class="categoria">
+            Spray Corpo e Cabelo
+        </span>
+
+        <div class="preco">
+            R$ 59,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 55 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/black-royal.png" alt="Black Royal">
+    </div>
+
+    <div class="info-produto">
+        <h3>Black Royal</h3>
+
+        <span class="categoria">
+            Masculino • Intenso
+        </span>
+
+        <div class="preco">
+            R$ 269,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 56 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/golden-pink.png" alt="Golden Pink">
+    </div>
+
+    <div class="info-produto">
+        <h3>Golden Pink</h3>
+
+        <span class="categoria">
+            Feminino • Luxo
+        </span>
+
+        <div class="preco">
+            R$ 249,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 57 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/body-gold.png" alt="Body Gold">
+    </div>
+
+    <div class="info-produto">
+        <h3>Body Gold</h3>
+
+        <span class="categoria">
+            Body Splash Premium
+        </span>
+
+        <div class="preco">
+            R$ 139,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 58 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/oud-premium.png" alt="Oud Premium">
+    </div>
+
+    <div class="info-produto">
+        <h3>Oud Premium</h3>
+
+        <span class="categoria">
+            Masculino • Oud
+        </span>
+
+        <div class="preco">
+            R$ 329,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 59 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/rose-night.png" alt="Rose Night">
+    </div>
+
+    <div class="info-produto">
+        <h3>Rose Night</h3>
+
+        <span class="categoria">
+            Feminino • Noturno
+        </span>
+
+        <div class="preco">
+            R$ 219,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 60 -->
+<div class="card-produto" data-categoria="unissex">
+    <div class="imagem-produto">
+        <img src="../imagens/lux-oud.png" alt="Lux Oud">
+    </div>
+
+    <div class="info-produto">
+        <h3>Lux Oud</h3>
+
+        <span class="categoria">
+            Unissex • Árabe
+        </span>
+
+        <div class="preco">
+            R$ 349,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+<!-- 61 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/royal-night.png" alt="Royal Night">
+    </div>
+
+    <div class="info-produto">
+        <h3>Royal Night</h3>
+
+        <span class="categoria">
+            Masculino • Intenso
+        </span>
+
+        <div class="preco">
+            R$ 299,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 62 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/pink-lux.png" alt="Pink Lux">
+    </div>
+
+    <div class="info-produto">
+        <h3>Pink Lux</h3>
+
+        <span class="categoria">
+            Feminino • Luxo
+        </span>
+
+        <div class="preco">
+            R$ 239,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 63 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/body-latte.png" alt="Body Latte">
+    </div>
+
+    <div class="info-produto">
+        <h3>Body Latte</h3>
+
+        <span class="categoria">
+            Body Splash • Doce
+        </span>
+
+        <div class="preco">
+            R$ 119,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 64 -->
+<div class="card-produto" data-categoria="spray">
+    <div class="imagem-produto">
+        <img src="../imagens/spray-black.png" alt="Spray Black">
+    </div>
+
+    <div class="info-produto">
+        <h3>Spray Black</h3>
+
+        <span class="categoria">
+            Spray Corpo e Cabelo
+        </span>
+
+        <div class="preco">
+            R$ 49,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 65 -->
+<div class="card-produto" data-categoria="unissex">
+    <div class="imagem-produto">
+        <img src="../imagens/amber-oud.png" alt="Amber Oud">
+    </div>
+
+    <div class="info-produto">
+        <h3>Amber Oud</h3>
+
+        <span class="categoria">
+            Unissex • Oud
+        </span>
+
+        <div class="preco">
+            R$ 399,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 66 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/floral-gold.png" alt="Floral Gold">
+    </div>
+
+    <div class="info-produto">
+        <h3>Floral Gold</h3>
+
+        <span class="categoria">
+            Feminino • Floral
+        </span>
+
+        <div class="preco">
+            R$ 199,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 67 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/elite-man.png" alt="Elite Man">
+    </div>
+
+    <div class="info-produto">
+        <h3>Elite Man</h3>
+
+        <span class="categoria">
+            Masculino • Premium
+        </span>
+
+        <div class="preco">
+            R$ 279,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 68 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/moon-pink.png" alt="Moon Pink">
+    </div>
+
+    <div class="info-produto">
+        <h3>Moon Pink</h3>
+
+        <span class="categoria">
+            Feminino • Rosado
+        </span>
+
+        <div class="preco">
+            R$ 209,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 69 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/body-sweet.png" alt="Body Sweet">
+    </div>
+
+    <div class="info-produto">
+        <h3>Body Sweet</h3>
+
+        <span class="categoria">
+            Body Splash
+        </span>
+
+        <div class="preco">
+            R$ 129,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 70 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/dark-oud.png" alt="Dark Oud">
+    </div>
+
+    <div class="info-produto">
+        <h3>Dark Oud</h3>
+
+        <span class="categoria">
+            Masculino • Oud
+        </span>
+
+        <div class="preco">
+            R$ 319,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 71 ao 89 seguem o mesmo padrão --> 
+ <!-- 71 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/lux-pink.png" alt="Lux Pink">
+    </div>
+
+    <div class="info-produto">
+        <h3>Lux Pink</h3>
+
+        <span class="categoria">
+            Feminino • Floral Premium
+        </span>
+
+        <div class="preco">
+            R$ 229,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 72 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/gold-man.png" alt="Gold Man">
+    </div>
+
+    <div class="info-produto">
+        <h3>Gold Man</h3>
+
+        <span class="categoria">
+            Masculino • Oriental
+        </span>
+
+        <div class="preco">
+            R$ 289,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 73 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/body-lux-pink.png" alt="Body Lux Pink">
+    </div>
+
+    <div class="info-produto">
+        <h3>Body Lux Pink</h3>
+
+        <span class="categoria">
+            Body Splash
+        </span>
+
+        <div class="preco">
+            R$ 119,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 74 -->
+<div class="card-produto" data-categoria="spray">
+    <div class="imagem-produto">
+        <img src="../imagens/spray-gold.png" alt="Spray Gold">
+    </div>
+
+    <div class="info-produto">
+        <h3>Spray Gold</h3>
+
+        <span class="categoria">
+            Spray Corpo e Cabelo
+        </span>
+
+        <div class="preco">
+            R$ 49,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 75 -->
+<div class="card-produto" data-categoria="unissex">
+    <div class="imagem-produto">
+        <img src="../imagens/royal-oud.png" alt="Royal Oud">
+    </div>
+
+    <div class="info-produto">
+        <h3>Royal Oud</h3>
+
+        <span class="categoria">
+            Unissex • Oud
+        </span>
+
+        <div class="preco">
+            R$ 359,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 76 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/rose-garden.png" alt="Rose Garden">
+    </div>
+
+    <div class="info-produto">
+        <h3>Rose Garden</h3>
+
+        <span class="categoria">
+            Feminino • Floral
+        </span>
+
+        <div class="preco">
+            R$ 209,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 77 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/night-gold.png" alt="Night Gold">
+    </div>
+
+    <div class="info-produto">
+        <h3>Night Gold</h3>
+
+        <span class="categoria">
+            Masculino • Premium
+        </span>
+
+        <div class="preco">
+            R$ 319,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 78 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/body-sunset.png" alt="Body Sunset">
+    </div>
+
+    <div class="info-produto">
+        <h3>Body Sunset</h3>
+
+        <span class="categoria">
+            Body Splash Tropical
+        </span>
+
+        <div class="preco">
+            R$ 129,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 79 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/rose-crystal.png" alt="Rose Crystal">
+    </div>
+
+    <div class="info-produto">
+        <h3>Rose Crystal</h3>
+
+        <span class="categoria">
+            Feminino • Cristalino
+        </span>
+
+        <div class="preco">
+            R$ 219,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 80 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/black-intense.png" alt="Black Intense">
+    </div>
+
+    <div class="info-produto">
+        <h3>Black Intense</h3>
+
+        <span class="categoria">
+            Masculino • Intenso
+        </span>
+
+        <div class="preco">
+            R$ 339,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 81 ao 89 seguem o mesmo padrão -->
+<!-- 81 -->
+<div class="card-produto" data-categoria="unissex">
+    <div class="imagem-produto">
+        <img src="../imagens/desert-oud.png" alt="Desert Oud">
+    </div>
+
+    <div class="info-produto">
+        <h3>Desert Oud</h3>
+
+        <span class="categoria">
+            Unissex • Oud Premium
+        </span>
+
+        <div class="preco">
+            R$ 369,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 82 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/diamond-pink.png" alt="Diamond Pink">
+    </div>
+
+    <div class="info-produto">
+        <h3>Diamond Pink</h3>
+
+        <span class="categoria">
+            Feminino • Luxuoso
+        </span>
+
+        <div class="preco">
+            R$ 249,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 83 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/body-crystal.png" alt="Body Crystal">
+    </div>
+
+    <div class="info-produto">
+        <h3>Body Crystal</h3>
+
+        <span class="categoria">
+            Body Splash • Cristalino
+        </span>
+
+        <div class="preco">
+            R$ 129,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 84 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/gold-elite.png" alt="Gold Elite">
+    </div>
+
+    <div class="info-produto">
+        <h3>Gold Elite</h3>
+
+        <span class="categoria">
+            Masculino • Elite
+        </span>
+
+        <div class="preco">
+            R$ 299,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 85 -->
+<div class="card-produto" data-categoria="spray">
+    <div class="imagem-produto">
+        <img src="../imagens/spray-royal.png" alt="Spray Royal">
+    </div>
+
+    <div class="info-produto">
+        <h3>Spray Royal</h3>
+
+        <span class="categoria">
+            Spray Corpo e Cabelo
+        </span>
+
+        <div class="preco">
+            R$ 59,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 86 -->
+<div class="card-produto" data-categoria="feminino">
+    <div class="imagem-produto">
+        <img src="../imagens/pink-dream.png" alt="Pink Dream">
+    </div>
+
+    <div class="info-produto">
+        <h3>Pink Dream</h3>
+
+        <span class="categoria">
+            Feminino • Doce Floral
+        </span>
+
+        <div class="preco">
+            R$ 199,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 87 -->
+<div class="card-produto" data-categoria="masculino">
+    <div class="imagem-produto">
+        <img src="../imagens/dark-gold.png" alt="Dark Gold">
+    </div>
+
+    <div class="info-produto">
+        <h3>Dark Gold</h3>
+
+        <span class="categoria">
+            Masculino • Gold Edition
+        </span>
+
+        <div class="preco">
+            R$ 329,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 88 -->
+<div class="card-produto" data-categoria="body-splash">
+    <div class="imagem-produto">
+        <img src="../imagens/body-night.png" alt="Body Night">
+    </div>
+
+    <div class="info-produto">
+        <h3>Body Night</h3>
+
+        <span class="categoria">
+            Body Splash • Noturno
+        </span>
+
+        <div class="preco">
+            R$ 139,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+    </div>
+</div>
+
+<!-- 89 -->
+<div class="card-produto" data-categoria="unissex">
+    <div class="imagem-produto">
+        <img src="../imagens/luxury-amber.png" alt="Luxury Amber">
+    </div>
+
+    <div class="info-produto">
+        <h3>Luxury Amber</h3>
+
+        <span class="categoria">
+            Unissex • Amber
+        </span>
+
+        <div class="preco">
+            R$ 389,99
+        </div>
+
+        <div class="controle-quantidade">
+            <button class="menos">-</button>
+            <span class="quantidade">1</span>
+            <button class="mais">+</button>
+        </div>
+
+        <button class="btn-comprar">
+            Comprar
+        </button>
+     </div>
+
+
+    </div>
+    </section>
+</body>
+</html>
+
+    <script src="catalogo.js"></script>
+
+<script>
+const cards =
+document.querySelectorAll(".card-produto");
+
+
+// ===========================
+// CARRINHO
+// ===========================
+
+cards.forEach(card => {
+
+    const menos =
+    card.querySelector(".menos");
+
+    const mais =
+    card.querySelector(".mais");
+
+    const quantidade =
+    card.querySelector(".quantidade");
+
+    const botaoComprar =
+    card.querySelector(".btn-comprar");
+
+    const nome =
+    card.querySelector("h3").innerText;
+
+    const preco =
+    card.querySelector(".preco").innerText;
+
+    let valor = 1;
+
+    // MAIS
+
+    mais.addEventListener("click", () => {
+
+        valor++;
+
+        quantidade.innerText = valor;
+
+    });
+
+    // MENOS
+
+    menos.addEventListener("click", () => {
+
+        if(valor > 1){
+
+            valor--;
+
+            quantidade.innerText = valor;
+
+        }
+
+    });
+
+    // COMPRAR
+
+    botaoComprar.addEventListener("click", () => {
+
+        adicionarCarrinho(
+            nome,
+            preco,
+            valor
+        );
+
+    });
+
+});
+
+
+// ===========================
+// ADICIONAR CARRINHO
+// ===========================
+
+function adicionarCarrinho(
+    nome,
+    preco,
+    qtd
+){
+
+    let carrinho =
+    JSON.parse(
+        localStorage.getItem(
+            "carrinhoRoyal"
+        )
+    ) || [];
+
+    // VERIFICA SE JÁ EXISTE
+
+    const produtoExistente =
+    carrinho.find(
+        item => item.nome === nome
+    );
+
+    if(produtoExistente){
+
+        produtoExistente.quantidade += qtd;
+
+    }else{
+
+        carrinho.push({
+
+            nome: nome,
+            preco: preco,
+            quantidade: qtd
+
+        });
+
+    }
+
+    localStorage.setItem(
+        "carrinhoRoyal",
+        JSON.stringify(carrinho)
+    );
+
+    atualizarCarrinho();
+
+}
+
+
+// ===========================
+// ATUALIZAR DROPDOWN
+// ===========================
+
+function atualizarCarrinho(){
+
+    const dropdown =
+    document.querySelector(
+        ".dropdown-carrinho"
+    );
+
+    const contador =
+    document.querySelector(
+        ".contador-carrinho"
+    );
+
+    let carrinho =
+    JSON.parse(
+        localStorage.getItem(
+            "carrinhoRoyal"
+        )
+    ) || [];
+
+    // CARRINHO VAZIO
+
+    if(carrinho.length === 0){
+
+        dropdown.innerHTML = `
+
+            <h3>Seu Carrinho</h3>
+
+            <p>
+                Carrinho vazio.
+            </p>
+
+        `;
+
+        if(contador){
+            contador.innerText = 0;
+        }
+
+        return;
+    }
+
+    // HTML
+
+    let html = `
+
+        <h3>Seu Carrinho</h3>
+
+    `;
+
+    let totalItens = 0;
+
+    let totalValor = 0;
+
+    carrinho.forEach((produto, index) => {
+
+        const precoNumero =
+        Number(
+            produto.preco
+            .replace("R$", "")
+            .replace(".", "")
+            .replace(",", ".")
+            .trim()
+        );
+
+        totalItens += produto.quantidade;
+
+        totalValor +=
+        precoNumero *
+        produto.quantidade;
+
+        html += `
+
+            <div class="item-carrinho">
+
+                <div>
+
+                    <strong>
+                        ${produto.nome}
+                    </strong>
+
+                    <span>
+                        ${produto.quantidade}x
+                    </span>
+
+                </div>
+
+                <div class="lado-direito-carrinho">
+
+                    <p>
+                        ${produto.preco}
+                    </p>
+
+                    <button
+                    class="btn-remover"
+                    onclick="removerItem(${index})">
+
+                        ✕
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    // TOTAL
+
+    html += `
+
+        <div class="footer-carrinho">
+
+            <strong>
+                Total:
+            </strong>
+
+            <span>
+                R$ ${totalValor
+                    .toFixed(2)
+                    .replace(".", ",")}
+            </span>
+
+        </div>
+
+        <a
+        class="btn-finalizar"
+        href="${gerarLinkWhatsApp(carrinho)}"
+        target="_blank">
+
+            Finalizar Pedido
+
+        </a>
+
+    `;
+
+    dropdown.innerHTML = html;
+
+    // CONTADOR
+
+    if(contador){
+        contador.innerText = totalItens;
+    }
+
+}
+
+
+// ===========================
+// REMOVER ITEM
+// ===========================
+
+function removerItem(index){
+
+    let carrinho =
+    JSON.parse(
+        localStorage.getItem(
+            "carrinhoRoyal"
+        )
+    ) || [];
+
+    carrinho.splice(index, 1);
+
+    localStorage.setItem(
+        "carrinhoRoyal",
+        JSON.stringify(carrinho)
+    );
+
+    atualizarCarrinho();
+
+}
+
+
+// ===========================
+// LINK WHATSAPP
+// ===========================
+
+function gerarLinkWhatsApp(carrinho){
+
+    let mensagem =
+    "Olá, gostaria de fazer um pedido:%0A%0A";
+
+    carrinho.forEach(produto => {
+
+        mensagem +=
+
+        `• ${produto.nome}
+Quantidade: ${produto.quantidade}
+Preço: ${produto.preco}
+
+`;
+
+    });
+
+    return `
+https://wa.me/5562981101187?text=${mensagem}
+    `;
+}
+
+
+// ===========================
+// BUSCA
+// ===========================
+
+const campoBusca =
+document.getElementById(
+    "campoBusca"
+);
+
+const btnBuscar =
+document.getElementById(
+    "btnBuscar"
+);
+
+const quantidadeProdutos =
+document.getElementById(
+    "quantidadeProdutos"
+);
+
+
+// ===========================
+// FILTROS
+// ===========================
+
+const filtros =
+document.querySelectorAll(
+    ".filtro"
+);
+
+let categoriaAtual =
+"todos";
+
+
+// ===========================
+// ORDENAR
+// ===========================
+
+const ordenarProdutos =
+document.getElementById(
+    "ordenarProdutos"
+);
+
+
+// ===========================
+// GRID
+// ===========================
+
+const grids =
+document.querySelectorAll(
+    ".grid-produtos"
+);
+
+
+// ===========================
+// FILTRAR PRODUTOS
+// ===========================
+
+function atualizarProdutos(){
+
+    const termo =
+    campoBusca.value
+    .toLowerCase()
+    .trim();
+
+    let visiveis = 0;
+
+    cards.forEach(card => {
+
+        const nome =
+        card.querySelector("h3")
+        .innerText
+        .toLowerCase();
+
+        const categoria =
+        card.querySelector(".categoria")
+        .innerText
+        .toLowerCase();
+
+        const categoriaCard =
+        card.dataset.categoria;
+
+        const bateBusca =
+
+            nome.includes(termo) ||
+
+            categoria.includes(termo);
+
+        const bateCategoria =
+
+            categoriaAtual === "todos" ||
+
+            categoriaCard === categoriaAtual;
+
+        if(
+            bateBusca &&
+            bateCategoria
+        ){
+
+            card.style.display =
+            "block";
+
+            visiveis++;
+
+        }else{
+
+            card.style.display =
+            "none";
+
+        }
+
+    });
+
+    // CONTADOR
+
+    if(visiveis === 0){
+
+        quantidadeProdutos.innerHTML =
+
+        `Nenhum produto encontrado`;
+
+    }else if(visiveis === 1){
+
+        quantidadeProdutos.innerHTML =
+
+        `1 produto encontrado`;
+
+    }else{
+
+        quantidadeProdutos.innerHTML =
+
+        `${visiveis} produtos encontrados`;
+
+    }
+
+}
+
+
+// ===========================
+// BOTÃO BUSCAR
+// ===========================
+
+btnBuscar.addEventListener(
+    "click",
+    atualizarProdutos
+);
+
+
+// ===========================
+// INPUT BUSCA
+// ===========================
+
+campoBusca.addEventListener(
+    "input",
+    atualizarProdutos
+);
+
+
+// ===========================
+// FILTROS
+// ===========================
+
+filtros.forEach(filtro => {
+
+    filtro.addEventListener(
+        "click",
+        () => {
+
+            filtros.forEach(btn => {
+
+                btn.classList.remove(
+                    "ativo"
+                );
+
+            });
+
+            filtro.classList.add(
+                "ativo"
+            );
+
+            categoriaAtual =
+            filtro.dataset.categoria;
+
+            atualizarProdutos();
+
+        }
+    );
+
+});
+
+
+// ===========================
+// ORDENAR
+// ===========================
+
+ordenarProdutos.addEventListener(
+    "change",
+    () => {
+
+        const cardsArray =
+        Array.from(cards);
+
+        cardsArray.sort((a, b) => {
+
+            const nomeA =
+            a.querySelector("h3")
+            .innerText;
+
+            const nomeB =
+            b.querySelector("h3")
+            .innerText;
+
+            const precoA =
+            Number(
+                a.querySelector(".preco")
+                .innerText
+                .replace("R$", "")
+                .replace(".", "")
+                .replace(",", ".")
+                .trim()
+            );
+
+            const precoB =
+            Number(
+                b.querySelector(".preco")
+                .innerText
+                .replace("R$", "")
+                .replace(".", "")
+                .replace(",", ".")
+                .trim()
+            );
+
+            // MENOR PREÇO
+
+            if(
+                ordenarProdutos.value ===
+                "menor-preco"
+            ){
+
+                return precoA - precoB;
+
+            }
+
+            // MAIOR PREÇO
+
+            if(
+                ordenarProdutos.value ===
+                "maior-preco"
+            ){
+
+                return precoB - precoA;
+
+            }
+
+            // A-Z
+
+            if(
+                ordenarProdutos.value ===
+                "az"
+            ){
+
+                return nomeA.localeCompare(
+                    nomeB
+                );
+
+            }
+
+            // Z-A
+
+            if(
+                ordenarProdutos.value ===
+                "za"
+            ){
+
+                return nomeB.localeCompare(
+                    nomeA
+                );
+
+            }
+
+            return 0;
+
+        });
+
+        // REINSERIR
+
+const gridPrincipal = document.querySelector(".grid-produtos");
+
+ordenarProdutos.addEventListener("change", () => {
+
+    const cardsArray = Array.from(cards);
+
+    cardsArray.sort((a, b) => {
+
+        const nomeA = a.querySelector("h3").innerText;
+        const nomeB = b.querySelector("h3").innerText;
+
+        const precoA = Number(
+            a.querySelector(".preco").innerText
+            .replace("R$", "")
+            .replace(".", "")
+            .replace(",", ".")
+            .trim()
+        );
+
+        const precoB = Number(
+            b.querySelector(".preco").innerText
+            .replace("R$", "")
+            .replace(".", "")
+            .replace(",", ".")
+            .trim()
+        );
+
+        if(ordenarProdutos.value === "menor-preco") return precoA - precoB;
+        if(ordenarProdutos.value === "maior-preco") return precoB - precoA;
+        if(ordenarProdutos.value === "az") return nomeA.localeCompare(nomeB);
+        if(ordenarProdutos.value === "za") return nomeB.localeCompare(nomeA);
+
+        return 0;
+    });
+
+    cardsArray.forEach(card => {
+        gridPrincipal.appendChild(card);
+    });
+
+    atualizarProdutos();
+});
+    }
+);
+
+
+// ===========================
+// INICIAR
+// ===========================
+
+atualizarCarrinho();
+
+quantidadeProdutos.innerHTML =
+
+`${cards.length} produtos disponíveis`;
+
+const btnCarrinho =
+document.querySelector(".btn-carrinho");
+
+const dropdown =
+document.querySelector(".dropdown-carrinho");
+
+btnCarrinho.addEventListener("click", () => {
+    dropdown.classList.toggle("ativo");
+});
+</script>
