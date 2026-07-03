@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Royal Perfumaria</title>
   <link rel="stylesheet" href="style.css">
+  
 </head>
 
 <body>
@@ -18,7 +19,7 @@
     <a href="#">Início</a>
     <a href="#">Masculinos</a>
     <a href="#">Femininos</a>
-    <a href="#">Promoções</a>
+    <a href="/catalogo.html">Catálogo</a>
     </nav>
 
   <div class="icones">
@@ -44,6 +45,8 @@
 
     <button class="btn-carrinho">
 
+        <span class="contador-carrinho">0</span>
+
         <svg xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -62,28 +65,26 @@
     </button>
 
     <div class="dropdown-carrinho">
+    </div>
+
+</div>
+
+    <div class="dropdown-carrinho">
 
         <h3>Seu Carrinho</h3>
 
         <div class="item-carrinho">
 
-            <img src="produto.jpg" alt="Perfume">
-
-            <div>
-
-                <p>Asad Lattafa</p>
-                <span>R$ 189,90</span>
-
-            </div>
 
         </div>
 
+        
         <a href="#" class="btn-finalizar">
             FINALIZAR PEDIDO
         </a>
 
     </div>
-
+</div>
 </div>
   </header>
 
@@ -129,7 +130,7 @@
   </p>
 
   <div class="botoes">
-    <a href="#produtos" class="btn-catalogo">
+    <a href="/catalogo.html" class="btn-catalogo">
     VER CATÁLOGO
 </a>
   </div>
@@ -138,44 +139,19 @@
 
 </section>
 
-<section class="produtos" id="produtos">
-  <h2>Mais Vendidos</h2>
-
-  <div class="grid-produtos">
-
-    <div class="card">
-      <img src="img/yara.png" alt="Yara Lattafa">
-      <h3>Yara Lattafa</h3>
-      <p>Feminino • 100ml</p>
-      <strong>R$ 189,90</strong>
-      <button>Comprar</button>
+<section class="mais-vendidos" id="maisVendidos">
+    <div class="titulo-secao">
+        <h2>Mais Vendidos</h2>
+        <p>Fragrâncias queridinhas da Royal Perfumaria</p>
     </div>
 
-    <div class="card">
-      <img src="img/club.png" alt="Club de Nuit">
-      <h3>Club de Nuit Intense</h3>
-      <p>Masculino • 105ml</p>
-      <strong>R$ 249,90</strong>
-      <button>Comprar</button>
-    </div>
+    <div class="carrossel-area">
+        <button class="seta-carrossel seta-esquerda" type="button">‹</button>
 
-    <div class="card">
-      <img src="img/asad.png" alt="Asad Lattafa">
-      <h3>Asad Lattafa</h3>
-      <p>Masculino • 100ml</p>
-      <strong>R$ 189,90</strong>
-      <button>Comprar</button>
-    </div>
+        <div class="carrossel-produtos" id="carrosselMaisVendidos"></div>
 
-    <div class="card">
-      <img src="img/lavie.png" alt="La Vie Est Belle">
-      <h3>La Vie Est Belle</h3>
-      <p>Feminino • 100ml</p>
-      <strong>R$ 499,90</strong>
-      <button>Comprar</button>
+        <button class="seta-carrossel seta-direita" type="button">›</button>
     </div>
-
-  </div>
 </section>
 
 <footer>
@@ -231,6 +207,46 @@
     cepTexto.textContent = cepInput.value;
   }
 </script>
+<script src="js/carrinho.js"></script>
+<script src="js/produtos.js"></script>
+<script>
+function adicionarCarrinho(nome, preco, qtd){
 
+    let carrinho =
+    JSON.parse(
+        localStorage.getItem("carrinhoRoyal")
+    ) || [];
+
+    const produtoExistente =
+    carrinho.find(
+        item => item.nome === nome
+    );
+
+    if(produtoExistente){
+
+        produtoExistente.quantidade += qtd;
+
+    }else{
+
+        carrinho.push({
+            nome: nome,
+            preco: preco,
+            quantidade: qtd
+        });
+
+    }
+
+    localStorage.setItem(
+        "carrinhoRoyal",
+        JSON.stringify(carrinho)
+    );
+
+    alert(nome + " adicionado ao carrinho!");
+}
+
+</script>
+<script src="catalogo/produtos.js"></script>
+<script src="js/carrinho.js"></script>
+<script src="index.js"></script>
 </body>
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Royal Perfumaria</title>
+    <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+
+<header class="topo-checkout">
+    <img src="logo-royal.png" alt="Royal Perfumaria">
+    <h1>Finalizar Pedido</h1>
+</header>
+
+<main class="checkout-container">
+
+    <section class="dados-cliente">
+        <h2>Dados do Cliente</h2>
+
+        <input type="text" id="nome" placeholder="Nome completo">
+        <input type="tel" id="telefone" placeholder="Telefone / WhatsApp">
+        <input type="text" id="cep" placeholder="CEP">
+        <input type="text" id="endereco" placeholder="Endereço">
+        <input type="text" id="numero" placeholder="Número">
+        <input type="text" id="bairro" placeholder="Bairro">
+        <input type="text" id="cidade" placeholder="Cidade">
+        <input type="text" id="complemento" placeholder="Complemento">
+
+        <select id="pagamento">
+            <option value="">Forma de pagamento</option>
+            <option value="PIX">PIX</option>
+            <option value="Cartão">Cartão</option>
+            <option value="Dinheiro">Dinheiro</option>
+        </select>
+    </section>
+
+    <section class="resumo-pedido">
+        <h2>Resumo do Pedido</h2>
+
+        <div id="listaCheckout"></div>
+
+        <div class="total-box">
+            <span>Total</span>
+            <strong id="totalCheckout">R$ 0,00</strong>
+        </div>
+
+        <button id="btnEnviarPedido">
+            Enviar Pedido no WhatsApp
+        </button>
+    </section>
+
+</main>
+
+<script src="checkout.js"></script>
+</body>
+</html>
