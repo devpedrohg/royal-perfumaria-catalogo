@@ -1,109 +1,25 @@
+let categoriaAtual = "todos";
+
 const gridProdutos = document.getElementById("gridProdutos");
 const campoBusca = document.getElementById("campoBusca");
 const btnBuscar = document.getElementById("btnBuscar");
-const quantidadeProdutos = document.getElementById("quantidadeProdutos");
 const filtros = document.querySelectorAll(".filtro");
 const ordenarProdutos = document.getElementById("ordenarProdutos");
+const quantidadeProdutos = document.getElementById("quantidadeProdutos");
 
-const CHAVE = "carrinhoRoyal";
-let categoriaAtual = "todos";
-
-function pegarCarrinho(){
-    return JSON.parse(localStorage.getItem(CHAVE)) || [];
-}
-
-function salvarCarrinho(carrinho){
-    localStorage.setItem(CHAVE, JSON.stringify(carrinho));
-}
-
-function converterPreco(preco){
+function precoNumero(preco){
     return Number(
-        preco.replace("R$", "")
-             .replace(".", "")
-             .replace(",", ".")
-             .trim()
+        String(preco)
+            .replace("R$", "")
+            .replace(".", "")
+            .replace(",", ".")
+            .trim()
     );
-}
-
-function adicionarCarrinho(produto){
-    const carrinho = pegarCarrinho();
-    const existente = carrinho.find(item => item.nome === produto.nome);
-
-    if(existente){
-        existente.quantidade += produto.quantidade;
-    }else{
-        carrinho.push(produto);
-    }
-
-    salvarCarrinho(carrinho);
-    atualizarCarrinho();
-}
-
-function removerItem(index){
-    const carrinho = pegarCarrinho();
-    carrinho.splice(index, 1);
-    salvarCarrinho(carrinho);
-    atualizarCarrinho();
-}
-
-function atualizarCarrinho(){
-    const dropdown = document.querySelector(".dropdown-carrinho");
-    const contador = document.querySelector(".contador-carrinho");
-
-    if(!dropdown || !contador) return;
-
-    const carrinho = pegarCarrinho();
-
-    if(carrinho.length === 0){
-        dropdown.innerHTML = `
-            <h3>Seu Carrinho</h3>
-            <p>Carrinho vazio.</p>
-        `;
-        contador.innerText = "0";
-        return;
-    }
-
-    let totalItens = 0;
-    let totalValor = 0;
-
-    let html = `<h3>Seu Carrinho</h3>`;
-
-    carrinho.forEach((produto, index) => {
-        totalItens += produto.quantidade;
-        totalValor += converterPreco(produto.preco) * produto.quantidade;
-
-        html += `
-            <div class="item-carrinho">
-                <div>
-                    <strong>${produto.nome}</strong>
-                    <span>${produto.quantidade}x ${produto.preco}</span>
-                </div>
-
-                <button class="btn-remover" onclick="removerItem(${index})">
-                    ✕
-                </button>
-            </div>
-        `;
-    });
-
-    html += `
-        <div class="footer-carrinho">
-            <strong>Total:</strong>
-            <span>R$ ${totalValor.toFixed(2).replace(".", ",")}</span>
-        </div>
-
-        <a href="../checkout.html" class="btn-finalizar">
-            Finalizar Pedido
-        </a>
-    `;
-
-    dropdown.innerHTML = html;
-    contador.innerText = totalItens;
 }
 
 function criarCard(produto){
     return `
-        <div class="card-produto" data-categoria="${produto.filtro}">
+        <div class="card-produto">
             <div class="imagem-produto">
                 <img src="${produto.imagem}" alt="${produto.nome}">
             </div>
@@ -111,7 +27,6 @@ function criarCard(produto){
             <div class="info-produto">
                 <h3>${produto.nome}</h3>
                 <span class="categoria">${produto.categoria}</span>
-
                 <div class="preco">${produto.preco}</div>
 
                 <div class="acoes-produto">
@@ -130,126 +45,125 @@ function criarCard(produto){
     `;
 }
 
-function renderizarProdutos(lista){
-    gridProdutos.innerHTML = "";
+function abrirModal(nomeProduto){
+    const modal = document.getElementById("modalCarrinho");
+    const produtoModal = document.getElementById("produtoModal");
 
-    lista.forEach(produto => {
-        gridProdutos.innerHTML += criarCard(produto);
-    });
+    if(modal && produtoModal){
+        produtoModal.innerText = nomeProduto;
+        modal.classList.add("ativo");
+    }
+}
+
+function renderizar(lista){
+    gridProdutos.innerHTML = lista.map(criarCard).join("");
 
     document.querySelectorAll(".card-produto").forEach((card, index) => {
         const produto = lista[index];
 
+        let qtd = 1;
+
         const menos = card.querySelector(".menos");
         const mais = card.querySelector(".mais");
-        const quantidadeTexto = card.querySelector(".quantidade");
+        const textoQtd = card.querySelector(".quantidade");
         const comprar = card.querySelector(".btn-comprar");
 
-        let quantidade = 1;
+        mais.onclick = () => {
+            qtd++;
+            textoQtd.innerText = qtd;
+        };
 
-        mais.addEventListener("click", () => {
-            quantidade++;
-            quantidadeTexto.innerText = quantidade;
-        });
-
-        menos.addEventListener("click", () => {
-            if(quantidade > 1){
-                quantidade--;
-                quantidadeTexto.innerText = quantidade;
+        menos.onclick = () => {
+            if(qtd > 1){
+                qtd--;
+                textoQtd.innerText = qtd;
             }
-        });
+        };
 
-        comprar.addEventListener("click", () => {
+        comprar.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
             adicionarCarrinho({
                 nome: produto.nome,
                 preco: produto.preco,
                 imagem: produto.imagem,
-                quantidade: quantidade
+                quantidade: qtd
             });
 
-            quantidade = 1;
-            quantidadeTexto.innerText = "1";
-        });
+            atualizarCarrinho();
+            abrirModal(produto.nome);
+
+            qtd = 1;
+            textoQtd.innerText = "1";
+        };
     });
 
-    atualizarQuantidade(lista.length);
+    quantidadeProdutos.innerText =
+        lista.length === 1
+            ? "1 produto encontrado"
+            : `${lista.length} produtos encontrados`;
 }
 
-function filtrarProdutos(){
+function filtrar(){
     const termo = campoBusca.value.toLowerCase().trim();
 
     let lista = produtos.filter(produto => {
-        const busca =
+        const bateBusca =
             produto.nome.toLowerCase().includes(termo) ||
             produto.categoria.toLowerCase().includes(termo);
 
-        const categoria =
+        const bateCategoria =
             categoriaAtual === "todos" ||
             produto.filtro === categoriaAtual;
 
-        return busca && categoria;
+        return bateBusca && bateCategoria;
     });
 
-    lista = ordenarLista(lista);
+    const ordem = ordenarProdutos.value;
 
-    renderizarProdutos(lista);
-}
-
-function ordenarLista(lista){
-    const tipo = ordenarProdutos.value;
-
-    return [...lista].sort((a, b) => {
-        const precoA = converterPreco(a.preco);
-        const precoB = converterPreco(b.preco);
-
-        if(tipo === "menor-preco") return precoA - precoB;
-        if(tipo === "maior-preco") return precoB - precoA;
-        if(tipo === "az") return a.nome.localeCompare(b.nome);
-        if(tipo === "za") return b.nome.localeCompare(a.nome);
-
+    lista.sort((a, b) => {
+        if(ordem === "menor-preco") return precoNumero(a.preco) - precoNumero(b.preco);
+        if(ordem === "maior-preco") return precoNumero(b.preco) - precoNumero(a.preco);
+        if(ordem === "az") return a.nome.localeCompare(b.nome);
+        if(ordem === "za") return b.nome.localeCompare(a.nome);
         return 0;
     });
+
+    renderizar(lista);
 }
 
-function atualizarQuantidade(total){
-    if(total === 0){
-        quantidadeProdutos.innerText = "Nenhum produto encontrado";
-    }else if(total === 1){
-        quantidadeProdutos.innerText = "1 produto encontrado";
-    }else{
-        quantidadeProdutos.innerText = `${total} produtos encontrados`;
-    }
-}
-
-btnBuscar.addEventListener("click", filtrarProdutos);
-campoBusca.addEventListener("input", filtrarProdutos);
-ordenarProdutos.addEventListener("change", filtrarProdutos);
+btnBuscar.onclick = filtrar;
+campoBusca.oninput = filtrar;
+ordenarProdutos.onchange = filtrar;
 
 filtros.forEach(filtro => {
-    filtro.addEventListener("click", () => {
+    filtro.onclick = () => {
         filtros.forEach(btn => btn.classList.remove("ativo"));
         filtro.classList.add("ativo");
-
         categoriaAtual = filtro.dataset.categoria;
-        filtrarProdutos();
-    });
+        filtrar();
+    };
 });
 
-const btnCarrinho = document.querySelector(".btn-carrinho");
-const dropdown = document.querySelector(".dropdown-carrinho");
+renderizar(produtos);
 
-if(btnCarrinho && dropdown){
-    btnCarrinho.addEventListener("click", (e) => {
-        e.stopPropagation();
-        dropdown.classList.toggle("ativo");
-    });
+const modal = document.getElementById("modalCarrinho");
+const continuarCompra = document.getElementById("continuarCompra");
+const irCheckout = document.getElementById("irCheckout");
 
-    dropdown.addEventListener("click", e => e.stopPropagation());
+if(modal && continuarCompra && irCheckout){
+    continuarCompra.onclick = () => {
+        modal.classList.remove("ativo");
+    };
 
-    document.addEventListener("click", () => {
-        dropdown.classList.remove("ativo");
-    });
+    irCheckout.onclick = () => {
+        window.location.href = "checkout.html";
+    };
+
+    modal.onclick = (e) => {
+        if(e.target === modal){
+            modal.classList.remove("ativo");
+        }
+    };
 }
-
-renderizarProdutos(produtos);
-atualizarCarrinho();

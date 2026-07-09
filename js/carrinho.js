@@ -1,74 +1,126 @@
-const CHAVE = "carrinhoRoyal";
+const CHAVE_CARRINHO = "carrinhoRoyal";
 
-let carrinho = JSON.parse(localStorage.getItem(CHAVE)) || [];
-
-function salvarCarrinho() {
-    localStorage.setItem(CHAVE, JSON.stringify(carrinho));
+function pegarCarrinho(){
+    return JSON.parse(localStorage.getItem(CHAVE_CARRINHO)) || [];
 }
 
-function adicionarCarrinho(produto) {
+function salvarCarrinho(carrinho){
+    localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
+}
 
-    const existente = carrinho.find(p => p.nome === produto.nome);
+function converterPreco(preco){
+    return Number(
+        String(preco)
+            .replace("R$", "")
+            .replace(".", "")
+            .replace(",", ".")
+            .trim()
+    );
+}
 
-    if (existente) {
-        existente.quantidade += produto.quantidade || 1;
-    } else {
+function formatarMoeda(valor){
+    return `R$ ${valor.toFixed(2).replace(".", ",")}`;
+}
+
+function adicionarCarrinho(produto){
+    const carrinho = pegarCarrinho();
+    const existente = carrinho.find(item => item.nome === produto.nome);
+
+    if(existente){
+        existente.quantidade += produto.quantidade;
+    }else{
         carrinho.push({
-            ...produto,
+            nome: produto.nome,
+            preco: produto.preco,
+            imagem: produto.imagem || "",
             quantidade: produto.quantidade || 1
         });
     }
 
-    salvarCarrinho();
+    salvarCarrinho(carrinho);
     atualizarCarrinho();
 }
 
-function removerCarrinho(indice) {
-    carrinho.splice(indice, 1);
-    salvarCarrinho();
+function removerItemCarrinho(index){
+    const carrinho = pegarCarrinho();
+    carrinho.splice(index, 1);
+    salvarCarrinho(carrinho);
     atualizarCarrinho();
 }
 
-function atualizarCarrinho() {
+function aumentarItemCarrinho(index){
+    const carrinho = pegarCarrinho();
+    carrinho[index].quantidade++;
+    salvarCarrinho(carrinho);
+    atualizarCarrinho();
+}
 
-    const contador = document.querySelector(".contador-carrinho");
-    const lista = document.querySelector(".item-carrinho");
+function diminuirItemCarrinho(index){
+    const carrinho = pegarCarrinho();
 
-    if (contador) {
-        contador.innerText = carrinho.reduce((t, p) => t + p.quantidade, 0);
+    if(carrinho[index].quantidade > 1){
+        carrinho[index].quantidade--;
+    }else{
+        carrinho.splice(index, 1);
     }
 
-    if (!lista) return;
+    salvarCarrinho(carrinho);
+    atualizarCarrinho();
+}
 
-    lista.innerHTML = "";
+function atualizarCarrinho(){
+    const contador = document.querySelector(".contador-carrinho");
+    const dropdown = document.querySelector(".dropdown-carrinho");
+    const carrinho = pegarCarrinho();
 
-    if (carrinho.length === 0) {
-        lista.innerHTML = "<p>Carrinho vazio.</p>";
+    const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
+
+    if(contador){
+        contador.innerText = totalItens;
+    }
+
+    if(!dropdown) return;
+
+    if(carrinho.length === 0){
+        dropdown.innerHTML = `
+            <h3>Seu Carrinho</h3>
+            <p class="carrinho-vazio">Carrinho vazio.</p>
+        `;
         return;
     }
 
     let total = 0;
 
-    carrinho.forEach((produto, i) => {
+    let html = `
+        <h3>Seu Carrinho</h3>
+        <div class="lista-carrinho">
+    `;
 
-        const preco = Number(
-            produto.preco
-                .replace("R$", "")
-                .replace(".", "")
-                .replace(",", ".")
-        );
+    carrinho.forEach((produto, index) => {
+        const preco = converterPreco(produto.preco);
+        const subtotal = preco * produto.quantidade;
 
-        total += preco * produto.quantidade;
+        total += subtotal;
 
-        lista.innerHTML += `
-            <div class="produto-carrinho">
+        html += `
+            <div class="item-carrinho">
 
-                <div>
-                    <strong>${produto.nome}</strong><br>
-                    ${produto.quantidade}x ${produto.preco}
+                <div class="foto-carrinho">
+                    ${produto.imagem ? `<img src="${produto.imagem}" alt="${produto.nome}">` : "🛍️"}
                 </div>
 
-                <button onclick="removerCarrinho(${i})">
+                <div class="info-carrinho">
+                    <strong>${produto.nome}</strong>
+                    <span>${produto.preco}</span>
+
+                    <div class="controle-carrinho">
+                        <button type="button" onclick="diminuirItemCarrinho(${index})">−</button>
+                        <span>${produto.quantidade}</span>
+                        <button type="button" onclick="aumentarItemCarrinho(${index})">+</button>
+                    </div>
+                </div>
+
+                <button class="btn-remover" type="button" onclick="removerItemCarrinho(${index})">
                     ✕
                 </button>
 
@@ -76,14 +128,42 @@ function atualizarCarrinho() {
         `;
     });
 
-    lista.innerHTML += `
-        <hr>
+    html += `
+        </div>
 
-        <div class="total-carrinho">
-            <strong>Total</strong>
-            <strong>R$ ${total.toFixed(2).replace(".", ",")}</strong>
+        <div class="footer-carrinho">
+            <div>
+                <span>Total</span>
+                <strong>${formatarMoeda(total)}</strong>
+            </div>
+
+            <a href="checkout.html" class="btn-finalizar">
+                Finalizar Pedido
+            </a>
         </div>
     `;
+
+    dropdown.innerHTML = html;
 }
 
-document.addEventListener("DOMContentLoaded", atualizarCarrinho);
+function iniciarCarrinho(){
+    atualizarCarrinho();
+
+    const btnCarrinho = document.querySelector(".btn-carrinho");
+    const dropdown = document.querySelector(".dropdown-carrinho");
+
+    if(btnCarrinho && dropdown){
+        btnCarrinho.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle("ativo");
+        });
+
+        dropdown.addEventListener("click", e => e.stopPropagation());
+
+        document.addEventListener("click", () => {
+            dropdown.classList.remove("ativo");
+        });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", iniciarCarrinho);
