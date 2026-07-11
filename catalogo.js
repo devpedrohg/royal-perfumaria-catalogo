@@ -1,39 +1,67 @@
-let categoriaAtual = "todos";
+const elementos = {
+    grid: document.getElementById("gridProdutos"),
+    busca: document.getElementById("campoBusca"),
+    btnBuscar: document.getElementById("btnBuscar"),
+    filtros: document.querySelectorAll(".filtro"),
+    ordenacao: document.getElementById("ordenarProdutos"),
+    quantidade: document.getElementById("quantidadeProdutos"),
+    modal: document.getElementById("modalCarrinho"),
+    produtoModal: document.getElementById("produtoModal"),
+    continuarCompra: document.getElementById("continuarCompra"),
+    irCheckout: document.getElementById("irCheckout")
+};
 
-const gridProdutos = document.getElementById("gridProdutos");
-const campoBusca = document.getElementById("campoBusca");
-const btnBuscar = document.getElementById("btnBuscar");
-const filtros = document.querySelectorAll(".filtro");
-const ordenarProdutos = document.getElementById("ordenarProdutos");
-const quantidadeProdutos = document.getElementById("quantidadeProdutos");
+const estado = {
+    categoria: "todos"
+};
 
-function precoNumero(preco){
+function converterPreco(preco) {
     return Number(
         String(preco)
             .replace("R$", "")
-            .replace(".", "")
+            .replace(/\./g, "")
             .replace(",", ".")
             .trim()
-    );
+    ) || 0;
 }
 
-function criarCard(produto){
+function criarCard(produto) {
     return `
-        <div class="card-produto">
+        <article class="card-produto">
             <div class="imagem-produto">
                 <img src="${produto.imagem}" alt="${produto.nome}">
             </div>
 
             <div class="info-produto">
                 <h3>${produto.nome}</h3>
-                <span class="categoria">${produto.categoria}</span>
-                <div class="preco">${produto.preco}</div>
+
+                <span class="categoria">
+                    ${produto.categoria}
+                </span>
+
+                <div class="preco">
+                    ${produto.preco}
+                </div>
 
                 <div class="acoes-produto">
                     <div class="controle-quantidade">
-                        <button class="menos" type="button">−</button>
-                        <span class="quantidade">1</span>
-                        <button class="mais" type="button">+</button>
+                        <button
+                            class="menos"
+                            type="button"
+                            aria-label="Diminuir quantidade"
+                        >
+                            −
+                        </button>
+
+                        <span class="quantidade">0</span>
+
+                        <button
+                            class="mais"
+                            type="button"
+                            aria-label="Aumentar quantidade"
+                        >
+                            +
+                        </button>
                     </div>
 
                     <button class="btn-comprar" type="button">
@@ -41,129 +69,246 @@ function criarCard(produto){
                     </button>
                 </div>
             </div>
-        </div>
+        </article>
     `;
 }
 
-function abrirModal(nomeProduto){
-    const modal = document.getElementById("modalCarrinho");
-    const produtoModal = document.getElementById("produtoModal");
+function abrirModal(nomeProduto) {
+    if (!elementos.modal || !elementos.produtoModal) return;
 
-    if(modal && produtoModal){
-        produtoModal.innerText = nomeProduto;
-        modal.classList.add("ativo");
+    elementos.produtoModal.textContent = nomeProduto;
+    elementos.modal.classList.add("ativo");
+}
+
+function fecharModal() {
+    elementos.modal?.classList.remove("ativo");
+}
+
+function adicionarProdutoAoCarrinho(produto, quantidadeExibida) {
+    if (typeof adicionarCarrinho !== "function") {
+        console.error("A função adicionarCarrinho não foi carregada.");
+        return;
     }
-}
 
-function renderizar(lista){
-    gridProdutos.innerHTML = lista.map(criarCard).join("");
+    const quantidadeFinal = Math.max(
+        1,
+        Number(quantidadeExibida) || 0
+    );
 
-    document.querySelectorAll(".card-produto").forEach((card, index) => {
-        const produto = lista[index];
-
-        let qtd = 1;
-
-        const menos = card.querySelector(".menos");
-        const mais = card.querySelector(".mais");
-        const textoQtd = card.querySelector(".quantidade");
-        const comprar = card.querySelector(".btn-comprar");
-
-        mais.onclick = () => {
-            qtd++;
-            textoQtd.innerText = qtd;
-        };
-
-        menos.onclick = () => {
-            if(qtd > 1){
-                qtd--;
-                textoQtd.innerText = qtd;
-            }
-        };
-
-        comprar.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-
-            adicionarCarrinho({
-                nome: produto.nome,
-                preco: produto.preco,
-                imagem: produto.imagem,
-                quantidade: qtd
-            });
-
-            atualizarCarrinho();
-            abrirModal(produto.nome);
-
-            qtd = 1;
-            textoQtd.innerText = "1";
-        };
+    adicionarCarrinho({
+        nome: produto.nome,
+        preco: produto.preco,
+        imagem: produto.imagem,
+        quantidade: quantidadeFinal
     });
 
-    quantidadeProdutos.innerText =
-        lista.length === 1
+    abrirModal(produto.nome);
+}
+
+function configurarCard(card, produto) {
+    const btnMenos = card.querySelector(".menos");
+    const btnMais = card.querySelector(".mais");
+    const textoQuantidade = card.querySelector(".quantidade");
+    const btnComprar = card.querySelector(".btn-comprar");
+
+    btnMais?.addEventListener("click", () => {
+    const quantidadeAtual =
+        Number(textoQuantidade.textContent) || 0;
+
+    textoQuantidade.textContent = quantidadeAtual + 1;
+
+    adicionarCarrinho({
+        nome: produto.nome,
+        preco: produto.preco,
+        imagem: produto.imagem,
+        quantidade: 1
+    });
+});
+    btnMenos?.addEventListener("click", () => {
+    const quantidadeAtual =
+        Number(textoQuantidade.textContent) || 0;
+
+    if (quantidadeAtual <= 0) return;
+
+    textoQuantidade.textContent = quantidadeAtual - 1;
+
+    diminuirProdutoDoCarrinho(produto.nome);
+});
+    btnComprar?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const quantidadeAtual =
+        Number(textoQuantidade.textContent) || 0;
+
+    if (quantidadeAtual === 0) {
+        adicionarCarrinho({
+            nome: produto.nome,
+            preco: produto.preco,
+            imagem: produto.imagem,
+            quantidade: 1
+        });
+
+        textoQuantidade.textContent = "1";
+    }
+
+    abrirModal(produto.nome);
+});
+}
+
+function atualizarTextoQuantidade(total) {
+    if (!elementos.quantidade) return;
+
+    if (total === 0) {
+        elementos.quantidade.textContent =
+            "Nenhum produto encontrado";
+        return;
+    }
+
+    elementos.quantidade.textContent =
+        total === 1
             ? "1 produto encontrado"
-            : `${lista.length} produtos encontrados`;
+            : `${total} produtos encontrados`;
 }
 
-function filtrar(){
-    const termo = campoBusca.value.toLowerCase().trim();
+function renderizarProdutos(lista) {
+    if (!elementos.grid) return;
 
-    let lista = produtos.filter(produto => {
-        const bateBusca =
-            produto.nome.toLowerCase().includes(termo) ||
-            produto.categoria.toLowerCase().includes(termo);
+    elementos.grid.innerHTML =
+        lista.map(criarCard).join("");
 
-        const bateCategoria =
-            categoriaAtual === "todos" ||
-            produto.filtro === categoriaAtual;
+    elementos.grid
+        .querySelectorAll(".card-produto")
+        .forEach((card, index) => {
+            configurarCard(card, lista[index]);
+        });
 
-        return bateBusca && bateCategoria;
-    });
+    atualizarTextoQuantidade(lista.length);
+}
 
-    const ordem = ordenarProdutos.value;
+function ordenarProdutos(lista) {
+    const tipo = elementos.ordenacao?.value || "padrao";
+    const copia = [...lista];
 
-    lista.sort((a, b) => {
-        if(ordem === "menor-preco") return precoNumero(a.preco) - precoNumero(b.preco);
-        if(ordem === "maior-preco") return precoNumero(b.preco) - precoNumero(a.preco);
-        if(ordem === "az") return a.nome.localeCompare(b.nome);
-        if(ordem === "za") return b.nome.localeCompare(a.nome);
+    copia.sort((produtoA, produtoB) => {
+        if (tipo === "menor-preco") {
+            return (
+                converterPreco(produtoA.preco) -
+                converterPreco(produtoB.preco)
+            );
+        }
+
+        if (tipo === "maior-preco") {
+            return (
+                converterPreco(produtoB.preco) -
+                converterPreco(produtoA.preco)
+            );
+        }
+
+        if (tipo === "az") {
+            return produtoA.nome.localeCompare(produtoB.nome);
+        }
+
+        if (tipo === "za") {
+            return produtoB.nome.localeCompare(produtoA.nome);
+        }
+
         return 0;
     });
 
-    renderizar(lista);
+    return copia;
 }
 
-btnBuscar.onclick = filtrar;
-campoBusca.oninput = filtrar;
-ordenarProdutos.onchange = filtrar;
+function obterProdutosFiltrados() {
+    const termo =
+        elementos.busca?.value.toLowerCase().trim() || "";
 
-filtros.forEach(filtro => {
-    filtro.onclick = () => {
-        filtros.forEach(btn => btn.classList.remove("ativo"));
-        filtro.classList.add("ativo");
-        categoriaAtual = filtro.dataset.categoria;
-        filtrar();
-    };
-});
+    const lista = produtos.filter((produto) => {
+        const nome =
+            String(produto.nome || "").toLowerCase();
 
-renderizar(produtos);
+        const categoria =
+            String(produto.categoria || "").toLowerCase();
 
-const modal = document.getElementById("modalCarrinho");
-const continuarCompra = document.getElementById("continuarCompra");
-const irCheckout = document.getElementById("irCheckout");
+        const correspondeBusca =
+            nome.includes(termo) ||
+            categoria.includes(termo);
 
-if(modal && continuarCompra && irCheckout){
-    continuarCompra.onclick = () => {
-        modal.classList.remove("ativo");
-    };
+        const correspondeCategoria =
+            estado.categoria === "todos" ||
+            produto.filtro === estado.categoria;
 
-    irCheckout.onclick = () => {
+        return correspondeBusca && correspondeCategoria;
+    });
+
+    return ordenarProdutos(lista);
+}
+
+function atualizarCatalogo() {
+    renderizarProdutos(obterProdutosFiltrados());
+}
+
+function configurarFiltros() {
+    elementos.filtros.forEach((filtro) => {
+        filtro.addEventListener("click", () => {
+            elementos.filtros.forEach((botao) => {
+                botao.classList.remove("ativo");
+            });
+
+            filtro.classList.add("ativo");
+
+            estado.categoria =
+                filtro.dataset.categoria || "todos";
+
+            atualizarCatalogo();
+        });
+    });
+}
+
+function configurarModal() {
+    elementos.continuarCompra?.addEventListener(
+        "click",
+        fecharModal
+    );
+
+    elementos.irCheckout?.addEventListener("click", () => {
         window.location.href = "checkout.html";
-    };
+    });
 
-    modal.onclick = (e) => {
-        if(e.target === modal){
-            modal.classList.remove("ativo");
+    elementos.modal?.addEventListener("click", (event) => {
+        if (event.target === elementos.modal) {
+            fecharModal();
         }
-    };
+    });
 }
+
+function iniciarCatalogo() {
+    if (
+        typeof produtos === "undefined" ||
+        !Array.isArray(produtos)
+    ) {
+        console.error("O array produtos não foi carregado.");
+        return;
+    }
+
+    elementos.btnBuscar?.addEventListener(
+        "click",
+        atualizarCatalogo
+    );
+
+    elementos.busca?.addEventListener(
+        "input",
+        atualizarCatalogo
+    );
+
+    elementos.ordenacao?.addEventListener(
+        "change",
+        atualizarCatalogo
+    );
+
+    configurarFiltros();
+    configurarModal();
+    renderizarProdutos(produtos);
+}
+
+iniciarCatalogo();

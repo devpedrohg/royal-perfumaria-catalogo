@@ -1,66 +1,95 @@
 const CHAVE_CARRINHO = "carrinhoRoyal";
 
-function pegarCarrinho(){
-    return JSON.parse(localStorage.getItem(CHAVE_CARRINHO)) || [];
+function pegarCarrinho() {
+    try {
+        return JSON.parse(localStorage.getItem(CHAVE_CARRINHO)) || [];
+    } catch {
+        return [];
+    }
 }
 
-function salvarCarrinho(carrinho){
+function salvarCarrinho(carrinho) {
     localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
 }
 
-function converterPreco(preco){
-    return Number(
-        String(preco)
-            .replace("R$", "")
-            .replace(".", "")
-            .replace(",", ".")
-            .trim()
-    );
-}
-
-function formatarMoeda(valor){
-    return `R$ ${valor.toFixed(2).replace(".", ",")}`;
-}
-
-function adicionarCarrinho(produto){
+function adicionarCarrinho(produto) {
+    const quantidade = Number(produto.quantidade) || 1;
     const carrinho = pegarCarrinho();
-    const existente = carrinho.find(item => item.nome === produto.nome);
 
-    if(existente){
-        existente.quantidade += produto.quantidade;
-    }else{
+    const existente = carrinho.find(
+        item => item.nome === produto.nome
+    );
+
+    if (existente) {
+        existente.quantidade =
+            (Number(existente.quantidade) || 0) + quantidade;
+    } else {
         carrinho.push({
             nome: produto.nome,
             preco: produto.preco,
             imagem: produto.imagem || "",
-            quantidade: produto.quantidade || 1
+            quantidade
         });
+        function diminuirProdutoDoCarrinho(nomeProduto) {
+    const carrinho = pegarCarrinho();
+
+    const index = carrinho.findIndex(
+        item => item.nome === nomeProduto
+    );
+
+    if (index === -1) return;
+
+    const quantidadeAtual =
+        Number(carrinho[index].quantidade) || 1;
+
+    if (quantidadeAtual > 1) {
+        carrinho[index].quantidade = quantidadeAtual - 1;
+    } else {
+        carrinho.splice(index, 1);
+    }
+    
+    salvarCarrinho(carrinho);
+    atualizarCarrinho();
+    
+}
     }
 
     salvarCarrinho(carrinho);
     atualizarCarrinho();
 }
 
-function removerItemCarrinho(index){
+function removerItemCarrinho(index) {
     const carrinho = pegarCarrinho();
+
+    if (!carrinho[index]) return;
+
     carrinho.splice(index, 1);
     salvarCarrinho(carrinho);
     atualizarCarrinho();
 }
 
-function aumentarItemCarrinho(index){
+function aumentarItemCarrinho(index) {
     const carrinho = pegarCarrinho();
-    carrinho[index].quantidade++;
+
+    if (!carrinho[index]) return;
+
+    carrinho[index].quantidade =
+        (Number(carrinho[index].quantidade) || 0) + 1;
+
     salvarCarrinho(carrinho);
     atualizarCarrinho();
 }
 
-function diminuirItemCarrinho(index){
+function diminuirItemCarrinho(index) {
     const carrinho = pegarCarrinho();
 
-    if(carrinho[index].quantidade > 1){
-        carrinho[index].quantidade--;
-    }else{
+    if (!carrinho[index]) return;
+
+    const quantidade = Number(carrinho[index].quantidade) || 1;
+
+    if (quantidade > 1) {
+        carrinho[index].quantidade = quantidade - 1;
+    } else {
         carrinho.splice(index, 1);
     }
 
@@ -68,102 +97,152 @@ function diminuirItemCarrinho(index){
     atualizarCarrinho();
 }
 
-function atualizarCarrinho(){
-    const contador = document.querySelector(".contador-carrinho");
-    const dropdown = document.querySelector(".dropdown-carrinho");
+function converterPreco(preco) {
+    return Number(
+        String(preco)
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(",", ".")
+            .trim()
+    ) || 0;
+}
+
+function formatarMoeda(valor) {
+    return valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
+function atualizarCarrinho() {
     const carrinho = pegarCarrinho();
+    const contadores = document.querySelectorAll(".contador-carrinho");
+    const dropdowns = document.querySelectorAll(".dropdown-carrinho");
 
-    const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
+    const totalItens = carrinho.reduce(
+        (total, item) =>
+            total + (Number(item.quantidade) || 0),
+        0
+    );
 
-    if(contador){
-        contador.innerText = totalItens;
-    }
+    contadores.forEach(contador => {
+        contador.textContent = totalItens;
+    });
 
-    if(!dropdown) return;
+    dropdowns.forEach(dropdown => {
+        if (carrinho.length === 0) {
+            dropdown.innerHTML = `
+                <h3>Seu Carrinho</h3>
+                <p class="carrinho-vazio">Carrinho vazio.</p>
+            `;
+            return;
+        }
 
-    if(carrinho.length === 0){
+        let total = 0;
+
+        const itensHtml = carrinho.map((item, index) => {
+            const quantidade = Number(item.quantidade) || 1;
+            const subtotal =
+                converterPreco(item.preco) * quantidade;
+
+            total += subtotal;
+
+            return `
+                <div class="item-carrinho">
+                    <div class="foto-carrinho">
+                        ${
+                            item.imagem
+                                ? `<img src="${item.imagem}" alt="${item.nome}">`
+                                : ""
+                        }
+                    </div>
+
+                    <div class="info-carrinho">
+                        <strong>${item.nome}</strong>
+                        <span>${item.preco}</span>
+
+                        <div class="controle-carrinho">
+                            <button
+                                type="button"
+                                onclick="diminuirItemCarrinho(${index})"
+                            >
+                                −
+                            </button>
+
+                            <span>${quantidade}</span>
+
+                            <button
+                                type="button"
+                                onclick="aumentarItemCarrinho(${index})"
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <button
+                        class="btn-remover"
+                        type="button"
+                        onclick="removerItemCarrinho(${index})"
+                    >
+                        ✕
+                    </button>
+                </div>
+            `;
+        }).join("");
+
         dropdown.innerHTML = `
             <h3>Seu Carrinho</h3>
-            <p class="carrinho-vazio">Carrinho vazio.</p>
-        `;
-        return;
-    }
 
-    let total = 0;
+            <div class="lista-carrinho">
+                ${itensHtml}
+            </div>
 
-    let html = `
-        <h3>Seu Carrinho</h3>
-        <div class="lista-carrinho">
-    `;
-
-    carrinho.forEach((produto, index) => {
-        const preco = converterPreco(produto.preco);
-        const subtotal = preco * produto.quantidade;
-
-        total += subtotal;
-
-        html += `
-            <div class="item-carrinho">
-
-                <div class="foto-carrinho">
-                    ${produto.imagem ? `<img src="${produto.imagem}" alt="${produto.nome}">` : "🛍️"}
+            <div class="footer-carrinho">
+                <div>
+                    <span>Total</span>
+                    <strong>${formatarMoeda(total)}</strong>
                 </div>
 
-                <div class="info-carrinho">
-                    <strong>${produto.nome}</strong>
-                    <span>${produto.preco}</span>
-
-                    <div class="controle-carrinho">
-                        <button type="button" onclick="diminuirItemCarrinho(${index})">−</button>
-                        <span>${produto.quantidade}</span>
-                        <button type="button" onclick="aumentarItemCarrinho(${index})">+</button>
-                    </div>
-                </div>
-
-                <button class="btn-remover" type="button" onclick="removerItemCarrinho(${index})">
-                    ✕
-                </button>
-
+                <a href="checkout.html" class="btn-finalizar">
+                    Finalizar Pedido
+                </a>
             </div>
         `;
     });
-
-    html += `
-        </div>
-
-        <div class="footer-carrinho">
-            <div>
-                <span>Total</span>
-                <strong>${formatarMoeda(total)}</strong>
-            </div>
-
-            <a href="checkout.html" class="btn-finalizar">
-                Finalizar Pedido
-            </a>
-        </div>
-    `;
-
-    dropdown.innerHTML = html;
 }
 
-function iniciarCarrinho(){
+function iniciarCarrinho() {
     atualizarCarrinho();
 
-    const btnCarrinho = document.querySelector(".btn-carrinho");
-    const dropdown = document.querySelector(".dropdown-carrinho");
+    const botoesCarrinho =
+        document.querySelectorAll(".btn-carrinho");
 
-    if(btnCarrinho && dropdown){
-        btnCarrinho.addEventListener("click", (e) => {
-            e.stopPropagation();
+    botoesCarrinho.forEach(botao => {
+        const areaCarrinho = botao.closest(".icone-carrinho");
+        const dropdown =
+            areaCarrinho?.querySelector(".dropdown-carrinho");
+
+        if (!dropdown) return;
+
+        botao.addEventListener("click", event => {
+            event.preventDefault();
+            event.stopPropagation();
             dropdown.classList.toggle("ativo");
         });
 
-        dropdown.addEventListener("click", e => e.stopPropagation());
-
-        document.addEventListener("click", () => {
-            dropdown.classList.remove("ativo");
+        dropdown.addEventListener("click", event => {
+            event.stopPropagation();
         });
-    }
+    });
+
+    document.addEventListener("click", () => {
+        document
+            .querySelectorAll(".dropdown-carrinho.ativo")
+            .forEach(dropdown => {
+                dropdown.classList.remove("ativo");
+            });
+    });
 }
 
 document.addEventListener("DOMContentLoaded", iniciarCarrinho);
