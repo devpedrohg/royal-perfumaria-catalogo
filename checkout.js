@@ -1,5 +1,5 @@
 const CHAVE = "carrinhoRoyal";
-const WHATSAPP_LOJA = "5562999736569 ";
+const WHATSAPP_ROYAL = "5562999736569";
 
 const listaCheckout = document.getElementById("listaCheckout");
 const totalCheckout = document.getElementById("totalCheckout");
@@ -175,8 +175,9 @@ btnFinalizar.addEventListener("click", () => {
     if(observacao){
         mensagem += `%0A📝 *Observação:* ${observacao}%0A`;
     }
+    const urlWhatsApp =
+    `https://wa.me/${WHATSAPP_ROYAL}?text=${encodeURIComponent(mensagem)}`;
 
-    window.open(`https://wa.me/${WHATSAPP_LOJA}?text=${mensagem}`, "_blank");
 });
 
 renderizarCheckout();

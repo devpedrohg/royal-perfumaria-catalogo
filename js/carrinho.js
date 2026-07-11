@@ -1,4 +1,39 @@
 const CHAVE_CARRINHO = "carrinhoRoyal";
+const WHATSAPP_ROYAL = "5562999736569";
+
+function finalizarCarrinhoWhatsApp() {
+    const carrinho = pegarCarrinho();
+
+    if (!carrinho.length) {
+        alert("Seu carrinho está vazio.");
+        return;
+    }
+
+    let total = 0;
+
+    let mensagem = `🛍️ *NOVO PEDIDO - ROYAL PERFUMARIA*\n\n`;
+    mensagem += `🛒 *Produtos selecionados*\n`;
+
+    carrinho.forEach((item) => {
+        const quantidade = Number(item.quantidade) || 1;
+        const subtotal = converterPreco(item.preco) * quantidade;
+
+        total += subtotal;
+
+        mensagem += `\n• *${item.nome}*\n`;
+        mensagem += `Quantidade: ${quantidade}\n`;
+        mensagem += `Preço unitário: ${item.preco}\n`;
+        mensagem += `Subtotal: ${formatarMoeda(subtotal)}\n`;
+    });
+
+    mensagem += `\n💰 *Total:* ${formatarMoeda(total)}\n`;
+    mensagem += `\nOlá! Gostaria de finalizar este pedido.`;
+
+    const urlWhatsApp =
+        `https://wa.me/${WHATSAPP_ROYAL}?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(urlWhatsApp, "_blank");
+}
 
 function pegarCarrinho() {
     try {
@@ -203,11 +238,14 @@ function atualizarCarrinho() {
                     <span>Total</span>
                     <strong>${formatarMoeda(total)}</strong>
                 </div>
-
-                <a href="checkout.html" class="btn-finalizar">
-                    Finalizar Pedido
-                </a>
-            </div>
+    
+                <button
+    class="btn-finalizar"
+    type="button"
+    onclick="finalizarCarrinhoWhatsApp()"
+>
+    Finalizar pelo WhatsApp
+</button>
         `;
     });
 }
