@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painel de Vendas | Royal Perfumaria</title>
+
+    <link rel="stylesheet" href="painel.css">
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <a href="../index.html" class="logo-painel">
+        <img src="../logo-royal.png" alt="Royal Perfumaria">
+    </a>
+
+    <nav class="menu-painel">
+        <a href="dashboard.html" class="ativo">
+            Dashboard
+        </a>
+
+        <a href="#pedidos">
+            Pedidos
+        </a>
+
+        <a href="#clientes">
+            Clientes
+        </a>
+
+        <a href="#relatorios">
+            Relatórios
+        </a>
+    </nav>
+
+    <a href="../index.html" class="btn-sair">
+        Sair do painel
+    </a>
+
+</aside>
+
+<main class="conteudo-painel">
+
+    <header class="topo-painel">
+        <div>
+            <span>Painel de vendas</span>
+            <h1>Olá, Gustavo!</h1>
+        </div>
+
+        <button id="btnAtualizar" type="button">
+            Atualizar pedidos
+        </button>
+    </header>
+
+    <section class="cards-resumo">
+
+        <article class="card-resumo">
+            <span>Vendas hoje</span>
+            <strong id="vendasHoje">R$ 0,00</strong>
+        </article>
+
+        <article class="card-resumo">
+            <span>Pedidos novos</span>
+            <strong id="pedidosNovos">0</strong>
+        </article>
+
+        <article class="card-resumo">
+            <span>Aguardando pagamento</span>
+            <strong id="pedidosPendentes">0</strong>
+        </article>
+
+        <article class="card-resumo">
+            <span>Concluídos</span>
+            <strong id="pedidosConcluidos">0</strong>
+        </article>
+
+    </section>
+
+    <section class="secao-pedidos" id="pedidos">
+
+        <div class="cabecalho-secao">
+            <div>
+                <span>Gestão de vendas</span>
+                <h2>Pedidos recentes</h2>
+            </div>
+
+            <div class="filtros-painel">
+                <input
+                    type="search"
+                    id="buscaPedido"
+                    placeholder="Buscar cliente ou pedido..."
+                >
+
+                <select id="filtroStatus">
+                    <option value="todos">Todos os status</option>
+                    <option value="novo">Novo</option>
+                    <option value="aguardando">Aguardando pagamento</option>
+                    <option value="pago">Pago</option>
+                    <option value="enviado">Enviado</option>
+                    <option value="concluido">Concluído</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="tabela-wrapper">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pedido</th>
+                        <th>Cliente</th>
+                        <th>Data</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listaPedidos"></tbody>
+            </table>
+
+            <div id="pedidosVazios" class="pedidos-vazios">
+                <strong>Nenhum pedido encontrado</strong>
+                <p>Os pedidos aparecerão aqui quando forem registrados.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<div class="modal-pedido" id="modalPedido">
+
+    <div class="modal-conteudo">
+
+        <button
+            type="button"
+            class="fechar-modal"
+            id="fecharModal"
+            aria-label="Fechar"
+        >
+            ✕
+        </button>
+
+        <span class="modal-legenda">Detalhes do pedido</span>
+
+        <h2 id="modalCodigo">ROYAL-0000</h2>
+
+        <div id="modalDetalhes"></div>
+
+    </div>
+
+</div>
+
+<script src="painel.js"></script>
+
+</body>
+</html>
