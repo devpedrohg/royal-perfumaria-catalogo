@@ -1,13 +1,8 @@
 (() => {
     "use strict";
 
-    /* =====================================================
-       CONFIGURAÇÕES
-    ===================================================== */
-
-    const CHAVE_CARRINHO_CHECKOUT = "carrinhoRoyal";
-    const CHAVE_PEDIDOS_CHECKOUT = "pedidosRoyal";
-    const WHATSAPP_ROYAL_CHECKOUT = "5562999736569";
+    const CHAVE_CARRINHO = "carrinhoRoyal";
+    const WHATSAPP_ROYAL = "5562999736569";
 
     const elementos = {
         lista: document.getElementById("listaCheckout"),
@@ -30,28 +25,22 @@
         observacao: document.getElementById("observacao")
     };
 
-
-    /* =====================================================
-       ARMAZENAMENTO
-    ===================================================== */
-
-    function lerLocalStorage(chave) {
+    function pegarCarrinho() {
         try {
-            const valor = JSON.parse(localStorage.getItem(chave));
-            return Array.isArray(valor) ? valor : [];
+            const carrinho = JSON.parse(
+                localStorage.getItem(CHAVE_CARRINHO)
+            );
+
+            return Array.isArray(carrinho) ? carrinho : [];
         } catch (erro) {
-            console.error(`Erro ao ler ${chave}:`, erro);
+            console.error("Erro ao carregar o carrinho:", erro);
             return [];
         }
     }
 
-    function pegarCarrinhoCheckout() {
-        return lerLocalStorage(CHAVE_CARRINHO_CHECKOUT);
-    }
-
-    function salvarCarrinhoCheckout(carrinho) {
+    function salvarCarrinho(carrinho) {
         localStorage.setItem(
-            CHAVE_CARRINHO_CHECKOUT,
+            CHAVE_CARRINHO,
             JSON.stringify(carrinho)
         );
 
@@ -60,23 +49,7 @@
         }
     }
 
-    function pegarPedidosCheckout() {
-        return lerLocalStorage(CHAVE_PEDIDOS_CHECKOUT);
-    }
-
-    function salvarPedidosCheckout(pedidos) {
-        localStorage.setItem(
-            CHAVE_PEDIDOS_CHECKOUT,
-            JSON.stringify(pedidos)
-        );
-    }
-
-
-    /* =====================================================
-       PREÇO E FORMATAÇÃO
-    ===================================================== */
-
-    function converterPrecoCheckout(preco) {
+    function converterPreco(preco) {
         if (typeof preco === "number") {
             return preco;
         }
@@ -90,7 +63,7 @@
         ) || 0;
     }
 
-    function formatarMoedaCheckout(valor) {
+    function formatarMoeda(valor) {
         return Number(valor || 0).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL"
@@ -106,34 +79,24 @@
             .replaceAll("'", "&#039;");
     }
 
-
-    /* =====================================================
-       TOTAL
-    ===================================================== */
-
-    function calcularTotalCheckout(carrinho) {
+    function calcularTotal(carrinho) {
         return carrinho.reduce((total, item) => {
             const quantidade = Number(item.quantidade) || 1;
-            const preco = converterPrecoCheckout(item.preco);
+            const preco = converterPreco(item.preco);
 
             return total + preco * quantidade;
         }, 0);
     }
 
-
-    /* =====================================================
-       RENDERIZAÇÃO DO CHECKOUT
-    ===================================================== */
-
     function renderizarCheckout() {
         if (!elementos.lista || !elementos.total) {
             console.error(
-                "Os elementos listaCheckout ou totalCheckout não foram encontrados."
+                "listaCheckout ou totalCheckout não encontrado."
             );
             return;
         }
 
-        const carrinho = pegarCarrinhoCheckout();
+        const carrinho = pegarCarrinho();
 
         if (carrinho.length === 0) {
             elementos.lista.innerHTML = `
@@ -163,7 +126,7 @@
         elementos.lista.innerHTML = carrinho
             .map((item, index) => {
                 const quantidade = Number(item.quantidade) || 1;
-                const preco = converterPrecoCheckout(item.preco);
+                const preco = converterPreco(item.preco);
                 const subtotal = preco * quantidade;
 
                 return `
@@ -192,7 +155,7 @@
 
                             <small>
                                 Subtotal:
-                                ${formatarMoedaCheckout(subtotal)}
+                                ${formatarMoeda(subtotal)}
                             </small>
 
                             <div class="controle">
@@ -232,30 +195,25 @@
             })
             .join("");
 
-        elementos.total.textContent = formatarMoedaCheckout(
-            calcularTotalCheckout(carrinho)
+        elementos.total.textContent = formatarMoeda(
+            calcularTotal(carrinho)
         );
     }
 
-
-    /* =====================================================
-       CONTROLES DOS PRODUTOS
-    ===================================================== */
-
-    function aumentarProdutoCheckout(index) {
-        const carrinho = pegarCarrinhoCheckout();
+    function aumentarProduto(index) {
+        const carrinho = pegarCarrinho();
 
         if (!carrinho[index]) return;
 
         carrinho[index].quantidade =
             (Number(carrinho[index].quantidade) || 0) + 1;
 
-        salvarCarrinhoCheckout(carrinho);
+        salvarCarrinho(carrinho);
         renderizarCheckout();
     }
 
-    function diminuirProdutoCheckout(index) {
-        const carrinho = pegarCarrinhoCheckout();
+    function diminuirProduto(index) {
+        const carrinho = pegarCarrinho();
 
         if (!carrinho[index]) return;
 
@@ -268,18 +226,18 @@
             carrinho.splice(index, 1);
         }
 
-        salvarCarrinhoCheckout(carrinho);
+        salvarCarrinho(carrinho);
         renderizarCheckout();
     }
 
-    function removerProdutoCheckout(index) {
-        const carrinho = pegarCarrinhoCheckout();
+    function removerProduto(index) {
+        const carrinho = pegarCarrinho();
 
         if (!carrinho[index]) return;
 
         carrinho.splice(index, 1);
 
-        salvarCarrinhoCheckout(carrinho);
+        salvarCarrinho(carrinho);
         renderizarCheckout();
     }
 
@@ -295,23 +253,18 @@
             if (!Number.isInteger(index)) return;
 
             if (acao === "aumentar") {
-                aumentarProdutoCheckout(index);
+                aumentarProduto(index);
             }
 
             if (acao === "diminuir") {
-                diminuirProdutoCheckout(index);
+                diminuirProduto(index);
             }
 
             if (acao === "remover") {
-                removerProdutoCheckout(index);
+                removerProduto(index);
             }
         });
     }
-
-
-    /* =====================================================
-       CEP
-    ===================================================== */
 
     function formatarCep(valor) {
         const numeros = String(valor || "")
@@ -330,9 +283,7 @@
 
         const cep = elementos.cep.value.replace(/\D/g, "");
 
-        if (cep.length !== 8) {
-            return;
-        }
+        if (cep.length !== 8) return;
 
         elementos.cep.disabled = true;
 
@@ -342,7 +293,7 @@
             );
 
             if (!resposta.ok) {
-                throw new Error("Não foi possível consultar o CEP.");
+                throw new Error("Erro ao consultar o CEP.");
             }
 
             const dados = await resposta.json();
@@ -352,27 +303,17 @@
                 return;
             }
 
-            if (elementos.endereco) {
-                elementos.endereco.value = dados.logradouro || "";
-            }
-
-            if (elementos.bairro) {
-                elementos.bairro.value = dados.bairro || "";
-            }
-
-            if (elementos.cidade) {
-                elementos.cidade.value = dados.localidade || "";
-            }
-
-            if (elementos.uf) {
-                elementos.uf.value = dados.uf || "";
-            }
+            elementos.endereco.value = dados.logradouro || "";
+            elementos.bairro.value = dados.bairro || "";
+            elementos.cidade.value = dados.localidade || "";
+            elementos.uf.value = dados.uf || "";
 
             elementos.numero?.focus();
         } catch (erro) {
             console.error("Erro ao buscar CEP:", erro);
+
             alert(
-                "Não foi possível buscar o CEP. Preencha o endereço manualmente."
+                "Não foi possível buscar o CEP. Preencha manualmente."
             );
         } finally {
             elementos.cep.disabled = false;
@@ -388,11 +329,6 @@
 
         elementos.cep?.addEventListener("blur", buscarCep);
     }
-
-
-    /* =====================================================
-       DADOS DO CLIENTE
-    ===================================================== */
 
     function pegarValor(elemento) {
         return elemento?.value.trim() || "";
@@ -442,7 +378,7 @@
         }
 
         if (dados.telefone.replace(/\D/g, "").length < 10) {
-            alert("Informe um número de WhatsApp válido.");
+            alert("Informe um WhatsApp válido.");
             elementos.telefone?.focus();
             return false;
         }
@@ -456,23 +392,13 @@
         return true;
     }
 
-
-    /* =====================================================
-       PEDIDO
-    ===================================================== */
-
-    function gerarCodigoPedido(pedidos) {
-        const numero = pedidos.length + 1;
-
-        return `ROYAL-${String(numero).padStart(4, "0")}`;
+    function gerarCodigoPedido() {
+        return `ROYAL-${Date.now().toString().slice(-8)}`;
     }
 
     function criarPedido(dados, carrinho, total) {
-        const pedidos = pegarPedidosCheckout();
-
         return {
-            id: Date.now(),
-            codigo: gerarCodigoPedido(pedidos),
+            codigo: gerarCodigoPedido(),
             criado_em: new Date().toISOString(),
             status: "novo",
 
@@ -481,12 +407,8 @@
                 telefone: dados.telefone
             },
 
-            telefone: dados.telefone,
-
             cep: dados.cep,
             endereco: `${dados.endereco}, Nº ${dados.numero} - ${dados.bairro}`,
-            numero: dados.numero,
-            bairro: dados.bairro,
             cidade: dados.cidade,
             uf: dados.uf,
             complemento: dados.complemento,
@@ -499,7 +421,7 @@
                     Number(item.quantidade) || 1;
 
                 const precoNumero =
-                    converterPrecoCheckout(item.preco);
+                    converterPreco(item.preco);
 
                 return {
                     nome: item.nome,
@@ -513,49 +435,34 @@
 
             total
         };
-
-    await fetch("/api/pedidos", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        cliente: nome,
-        telefone,
-        endereco,
-        produtos: carrinho,
-        total
-    })
-})
-
-    let resultado = {};
-
-    try {
-        resultado = await resposta.json();
-    } catch {
-        resultado = {};
     }
 
-    if (!resposta.ok) {
-        throw new Error(
-            resultado.erro ||
-            "Não foi possível salvar o pedido no servidor."
-        );
+    async function registrarPedido(pedido) {
+        const resposta = await fetch("/api/pedidos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(pedido)
+        });
+
+        let resultado = {};
+
+        try {
+            resultado = await resposta.json();
+        } catch {
+            resultado = {};
+        }
+
+        if (!resposta.ok) {
+            throw new Error(
+                resultado.erro ||
+                "Não foi possível registrar o pedido."
+            );
+        }
+
+        return resultado;
     }
-
-    return resultado;
-
-        const pedidos = pegarPedidosCheckout();
-
-        pedidos.unshift(pedido);
-
-        salvarPedidosCheckout(pedidos);
-    }
-
-
-    /* =====================================================
-       MENSAGEM DO WHATSAPP
-    ===================================================== */
 
     function gerarMensagemWhatsApp(pedido) {
         let mensagem = "";
@@ -582,11 +489,11 @@
             mensagem += `\n• *${item.nome}*\n`;
             mensagem += `Quantidade: ${item.quantidade}\n`;
             mensagem += `Preço unitário: ${item.preco}\n`;
-            mensagem += `Subtotal: ${formatarMoedaCheckout(item.subtotal)}\n`;
+            mensagem += `Subtotal: ${formatarMoeda(item.subtotal)}\n`;
         });
 
         mensagem += `\n💳 *Pagamento:* ${pedido.pagamento}\n`;
-        mensagem += `💰 *Total:* ${formatarMoedaCheckout(pedido.total)}\n`;
+        mensagem += `💰 *Total:* ${formatarMoeda(pedido.total)}\n`;
 
         if (pedido.observacao) {
             mensagem += `\n📝 *Observação:*\n`;
@@ -602,7 +509,7 @@
         const mensagem = gerarMensagemWhatsApp(pedido);
 
         const url =
-            `https://wa.me/${WHATSAPP_ROYAL_CHECKOUT}` +
+            `https://wa.me/${WHATSAPP_ROYAL}` +
             `?text=${encodeURIComponent(mensagem)}`;
 
         const janela = window.open(
@@ -616,13 +523,8 @@
         }
     }
 
-
-    /* =====================================================
-       FINALIZAÇÃO
-    ===================================================== */
-
-    function limparCarrinhoDepoisDoPedido() {
-        localStorage.removeItem(CHAVE_CARRINHO_CHECKOUT);
+    function limparCarrinho() {
+        localStorage.removeItem(CHAVE_CARRINHO);
 
         if (typeof window.atualizarCarrinho === "function") {
             window.atualizarCarrinho();
@@ -632,7 +534,7 @@
     }
 
     async function finalizarPedido() {
-        const carrinho = pegarCarrinhoCheckout();
+        const carrinho = pegarCarrinho();
 
         if (carrinho.length === 0) {
             alert("Seu carrinho está vazio.");
@@ -645,7 +547,7 @@
             return;
         }
 
-        const total = calcularTotalCheckout(carrinho);
+        const total = calcularTotal(carrinho);
         const pedido = criarPedido(dados, carrinho, total);
 
         elementos.btnFinalizar.disabled = true;
@@ -654,8 +556,9 @@
 
         try {
             await registrarPedido(pedido);
-            abrirWhatsApp(pedido); 
-            limparCarrinhoDepoisDoPedido();
+
+            abrirWhatsApp(pedido);
+            limparCarrinho();
 
             alert(
                 `Pedido ${pedido.codigo} registrado com sucesso!`
@@ -664,7 +567,8 @@
             console.error("Erro ao finalizar pedido:", erro);
 
             alert(
-                "Não foi possível finalizar o pedido. Tente novamente."
+                erro.message ||
+                "Não foi possível finalizar o pedido."
             );
         } finally {
             elementos.btnFinalizar.disabled = false;
@@ -673,18 +577,7 @@
         }
     }
 
-
-    /* =====================================================
-       INICIALIZAÇÃO
-    ===================================================== */
-
     function iniciarCheckout() {
-        if (!elementos.btnFinalizar) {
-            console.error(
-                "Botão btnFinalizar ou btnEnviarPedido não encontrado."
-            );
-        }
-
         configurarEventosDosProdutos();
         configurarCep();
 
