@@ -1,7 +1,6 @@
 const CHAVE_CARRINHO = "carrinhoRoyal";
 const WHATSAPP_ROYAL = "5562999736569";
-
-function finalizarCarrinhoWhatsApp() {
+{
     const carrinho = pegarCarrinho();
 
     if (!carrinho.length) {
@@ -239,13 +238,9 @@ function atualizarCarrinho() {
                     <strong>${formatarMoeda(total)}</strong>
                 </div>
     
-                <button
-    class="btn-finalizar"
-    type="button"
-    onclick="finalizarCarrinhoWhatsApp()"
->
-    Finalizar pelo WhatsApp
-</button>
+               <a href="checkout.html" class="btn-finalizar">
+    Ir para o Checkout
+</a>
         `;
     });
 }
@@ -283,4 +278,4 @@ function iniciarCarrinho() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", iniciarCarrinho);
+document.addEventListener("DOMContentLoaded", iniciarCarrinho); 
