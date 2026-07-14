@@ -64,6 +64,9 @@ function adicionarCarrinho(produto) {
             imagem: produto.imagem || "",
             quantidade
         });
+        salvarCarrinho(carrinho);
+        atualizarCarrinho();
+}
         function diminuirProdutoDoCarrinho(nomeProduto) {
     const carrinho = pegarCarrinho();
 
@@ -279,3 +282,7 @@ function iniciarCarrinho() {
 }
 
 document.addEventListener("DOMContentLoaded", iniciarCarrinho); 
+
+window.adicionarCarrinho = adicionarCarrinho;
+window.diminuirProdutoDoCarrinho = diminuirProdutoDoCarrinho;
+window.atualizarCarrinho = atualizarCarrinho;
