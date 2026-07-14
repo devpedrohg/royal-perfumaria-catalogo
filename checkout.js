@@ -515,7 +515,32 @@
         };
     }
 
-    function registrarPedido(pedido) {
+    async function registrarPedido(pedido) {
+    const resposta = await fetch("/api/pedidos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(pedido)
+    });
+
+    let resultado = {};
+
+    try {
+        resultado = await resposta.json();
+    } catch {
+        resultado = {};
+    }
+
+    if (!resposta.ok) {
+        throw new Error(
+            resultado.erro ||
+            "Não foi possível salvar o pedido no servidor."
+        );
+    }
+
+    return resultado;
+
         const pedidos = pegarPedidosCheckout();
 
         pedidos.unshift(pedido);
@@ -602,7 +627,7 @@
         renderizarCheckout();
     }
 
-    function finalizarPedido() {
+    async function finalizarPedido() {
         const carrinho = pegarCarrinhoCheckout();
 
         if (carrinho.length === 0) {
@@ -624,8 +649,8 @@
             "PROCESSANDO PEDIDO...";
 
         try {
-            registrarPedido(pedido);
-            abrirWhatsApp(pedido);
+            await registrarPedido(pedido);
+            abrirWhatsApp(pedido); 
             limparCarrinhoDepoisDoPedido();
 
             alert(
