@@ -513,16 +513,20 @@
 
             total
         };
-    }
 
-    async function registrarPedido(pedido) {
-    const resposta = await fetch("/api/pedidos", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(pedido)
-    });
+    await fetch("/api/pedidos", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        cliente: nome,
+        telefone,
+        endereco,
+        produtos: carrinho,
+        total
+    })
+})
 
     let resultado = {};
 
