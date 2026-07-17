@@ -111,49 +111,61 @@ function configurarCard(card, produto) {
     const textoQuantidade = card.querySelector(".quantidade");
     const btnComprar = card.querySelector(".btn-comprar");
 
-    btnMais?.addEventListener("click", () => {
-    const quantidadeAtual =
-        Number(textoQuantidade.textContent) || 0;
+    btnMais?.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-    textoQuantidade.textContent = quantidadeAtual + 1;
+        if (typeof window.adicionarCarrinho !== "function") {
+            console.error("adicionarCarrinho não encontrada.");
+            return;
+        }
 
-    adicionarCarrinho({
-        nome: produto.nome,
-        preco: produto.preco,
-        imagem: produto.imagem,
-        quantidade: 1
-    });
-});
-    btnMenos?.addEventListener("click", () => {
-    const quantidadeAtual =
-        Number(textoQuantidade.textContent) || 0;
-
-    if (quantidadeAtual <= 0) return;
-
-    textoQuantidade.textContent = quantidadeAtual - 1;
-
-    diminuirProdutoDoCarrinho(produto.nome);
-});
-    btnComprar?.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const quantidadeAtual =
-        Number(textoQuantidade.textContent) || 0;
-
-    if (quantidadeAtual === 0) {
-        adicionarCarrinho({
+        window.adicionarCarrinho({
             nome: produto.nome,
             preco: produto.preco,
             imagem: produto.imagem,
             quantidade: 1
         });
 
-        textoQuantidade.textContent = "1";
-    }
+        textoQuantidade.textContent =
+            Number(textoQuantidade.textContent || 0) + 1;
+    });
 
-    abrirModal(produto.nome);
-});
+    btnMenos?.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const quantidade = Number(textoQuantidade.textContent) || 0;
+
+        if (quantidade <= 0) return;
+
+        if (typeof window.diminuirProdutoDoCarrinho !== "function") {
+            console.error("diminuirProdutoDoCarrinho não encontrada.");
+            return;
+        }
+
+        window.diminuirProdutoDoCarrinho(produto.nome);
+
+        textoQuantidade.textContent = quantidade - 1;
+    });
+
+    btnComprar?.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (Number(textoQuantidade.textContent) === 0) {
+            window.adicionarCarrinho({
+                nome: produto.nome,
+                preco: produto.preco,
+                imagem: produto.imagem,
+                quantidade: 1
+            });
+
+            textoQuantidade.textContent = "1";
+        }
+
+        abrirModal(produto.nome);
+    });
 }
 
 function atualizarTextoQuantidade(total) {
