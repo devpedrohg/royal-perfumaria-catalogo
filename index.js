@@ -201,7 +201,7 @@ if (
             const produto = maisVendidos[index];
 
             const btnMenos = card.querySelector(".menos");
-            const btnMais = card.querySelector(".;");
+            const btnMais = card.querySelector(".mais");
             const textoQuantidade =
                 card.querySelector(".quantidade");
 
