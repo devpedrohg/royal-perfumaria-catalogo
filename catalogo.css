@@ -872,3 +872,40 @@ body{
 .footer-social a:hover svg{
     transform:scale(1.15);
 }
+/* ======================
+        HERO
+====================== */
+
+.hero-catalogo{
+    width:100%;
+    margin-top:82px;
+    line-height:0;
+    overflow:hidden;
+    background:#000;
+}
+
+.hero-catalogo picture{
+    display:block;
+    width:100%;
+}
+
+.hero-catalogo img{
+    display:block;
+    width:100%;
+    height:auto;
+}
+
+@media (max-width:768px){
+
+    .hero-catalogo{
+        margin-top:72px;
+    }
+
+    .hero-catalogo picture,
+    .hero-catalogo img{
+        width:100%;
+        height:auto;
+        display:block;
+    }
+
+}
