@@ -11,8 +11,24 @@ const elementos = {
     irCheckout: document.getElementById("irCheckout")
 };
 
+const parametrosUrl = new URLSearchParams(window.location.search);
+
+const categoriaUrl =
+    parametrosUrl.get("categoria") || "todos";
+
+const categoriasPermitidas = [
+    "todos",
+    "masculino",
+    "feminino",
+    "body-splash",
+    "spray",
+    "outros"
+];
+
 const estado = {
-    categoria: "todos"
+    categoria: categoriasPermitidas.includes(categoriaUrl)
+        ? categoriaUrl
+        : "todos"
 };
 
 function converterPreco(preco) {
@@ -262,6 +278,14 @@ function atualizarCatalogo() {
 
 function configurarFiltros() {
     elementos.filtros.forEach((filtro) => {
+        const categoria =
+            filtro.dataset.categoria || "todos";
+
+        filtro.classList.toggle(
+            "ativo",
+            categoria === estado.categoria
+        );
+
         filtro.addEventListener("click", () => {
             elementos.filtros.forEach((botao) => {
                 botao.classList.remove("ativo");
@@ -269,8 +293,18 @@ function configurarFiltros() {
 
             filtro.classList.add("ativo");
 
-            estado.categoria =
-                filtro.dataset.categoria || "todos";
+            estado.categoria = categoria;
+
+            const novaUrl =
+                categoria === "todos"
+                    ? "catalogo.html"
+                    : `catalogo.html?categoria=${categoria}`;
+
+            window.history.replaceState(
+                {},
+                "",
+                novaUrl
+            );
 
             atualizarCatalogo();
         });
@@ -320,7 +354,7 @@ function iniciarCatalogo() {
 
     configurarFiltros();
     configurarModal();
-    renderizarProdutos(produtos);
+    atualizarCatalogo();
 }
 
 iniciarCatalogo();
