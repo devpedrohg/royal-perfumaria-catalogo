@@ -21,8 +21,10 @@ const categoriasPermitidas = [
     "masculino",
     "feminino",
     "body-splash",
-    "spray",
-    "outros"
+    "corpo",
+    "cabelo",
+    "unissex",
+    "promocoes"
 ];
 
 const estado = {
