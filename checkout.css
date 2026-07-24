@@ -593,17 +593,29 @@ textarea::placeholder{
         height:18px;
     }
 
+    @media(max-width:900px){
+    }
     .checkout-container{
         width:calc(100% - 24px);
         margin:22px auto 40px;
-        grid-template-columns:1fr;
+        display:flex;
+        flex-direction:column;
         gap:17px;
+    }
+
+    .dados-cliente{
+        order:1;
     }
 
     .resumo-pedido{
         position:relative;
         top:auto;
-        order:-1;
+        order:2;
+    }
+
+    .resumo-pedido{
+        position:relative;
+        top:auto;
     }
 
     .dados-cliente,
