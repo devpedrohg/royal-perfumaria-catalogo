@@ -212,7 +212,7 @@ body{
     grid-template-columns:repeat(3, minmax(0, 1fr));
     gap:32px;
     width:100%;
-    margin:0 auto;
+    align-items:stretch;
 }
 
 .card-produto{
@@ -547,6 +547,11 @@ body{
     .imagem-produto{
         height:210px;
     }
+    .catalogo{
+    max-width:1500px;
+    width:92%;
+    margin:0 auto;
+}
 
     .info-produto{
         padding:14px;
