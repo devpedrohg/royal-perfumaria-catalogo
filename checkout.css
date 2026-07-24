@@ -593,14 +593,16 @@ textarea::placeholder{
         height:18px;
     }
 
-    @media(max-width:900px){
-    }
+    @media (max-width:900px){
+
     .checkout-container{
         width:calc(100% - 24px);
         margin:22px auto 40px;
-        display:flex;
-        flex-direction:column;
-        gap:17px;
+
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:16px;
+        align-items:start;
     }
 
     .dados-cliente{
@@ -608,15 +610,12 @@ textarea::placeholder{
     }
 
     .resumo-pedido{
-        position:relative;
-        top:auto;
         order:2;
+        position:sticky;
+        top:90px;
     }
 
-    .resumo-pedido{
-        position:relative;
-        top:auto;
-    }
+}
 
     .dados-cliente,
     .resumo-pedido{
