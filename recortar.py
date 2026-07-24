@@ -1,52 +1,99 @@
-from PIL import Image, ImageChops
-import os
+from io import BytesIO
+from pathlib import Path
+from PIL import Image
+from rembg import remove
 
-ENTRADA = "imagens"
-SAIDA = "imagens-recortadas"
+from pathlib import Path
 
-os.makedirs(SAIDA, exist_ok=True)
+PASTA_ENTRADA = Path("imagens")
+PASTA_SAIDA = Path("imagens-recortadas")
 
-for arquivo in os.listdir(ENTRADA):
+print("SCRIPT INICIADO")
+print("Pasta atual:", PASTA_ENTRADA)
 
-    if not arquivo.lower().endswith((".png", ".jpg", ".jpeg", ".webp", ".avif")):
-        continue
+PASTA_ENTRADA = Path("imagens")
+PASTA_SAIDA = Path("imagens-recortadas")
 
+TAMANHO_TELA = 900
+MARGEM = 50
+EXTENSOES = {".png", ".jpg", ".jpeg", ".webp", ".avif"}
+
+PASTA_SAIDA.mkdir(parents=True, exist_ok=True)
+
+if not PASTA_ENTRADA.exists():
+    raise FileNotFoundError(
+        f'A pasta "{PASTA_ENTRADA}" não foi encontrada.'
+    )
+
+arquivos = [
+    arquivo
+    for arquivo in PASTA_ENTRADA.iterdir()
+    if arquivo.is_file() and arquivo.suffix.lower() in EXTENSOES
+]
+
+print(f"{len(arquivos)} imagens encontradas.\n")
+
+print(f"{len(arquivos)} imagens encontradas")
+
+for indice, arquivo in enumerate(arquivos, start=1):
     try:
-        print("Processando:", arquivo)
+        print(f"[{indice}/{len(arquivos)}] Processando: {arquivo.name}")
 
-        caminho = os.path.join(ENTRADA, arquivo)
-        img = Image.open(caminho).convert("RGBA")
+        dados_originais = arquivo.read_bytes()
+        dados_sem_fundo = remove(dados_originais)
 
-        alpha = img.getchannel("A")
+        imagem = Image.open(BytesIO(dados_sem_fundo)).convert("RGBA")
+
+        alpha = imagem.getchannel("A")
         bbox = alpha.getbbox()
 
-        if bbox:
-            img = img.crop(bbox)
+        if not bbox:
+            print(f"AVISO: nenhuma área visível encontrada em {arquivo.name}")
+            continue
 
-        tela = Image.new("RGBA", (900, 900), (0, 0, 0, 0))
+        imagem = imagem.crop(bbox)
+
+        area_util = TAMANHO_TELA - (MARGEM * 2)
 
         escala = min(
-            900 * 0.98 / img.width,
-            900 * 0.98 / img.height
+            area_util / imagem.width,
+            area_util / imagem.height
         )
 
-        nova_largura = int(img.width * escala)
-        nova_altura = int(img.height * escala)
+        nova_largura = max(1, int(imagem.width * escala))
+        nova_altura = max(1, int(imagem.height * escala))
 
-        img = img.resize((nova_largura, nova_altura), Image.LANCZOS)
+        imagem = imagem.resize(
+            (nova_largura, nova_altura),
+            Image.Resampling.LANCZOS
+        )
 
-        x = (900 - nova_largura) // 2
-        y = 900 - nova_altura
+        tela = Image.new(
+            "RGBA",
+            (TAMANHO_TELA, TAMANHO_TELA),
+            (0, 0, 0, 0)
+        )
 
-        tela.paste(img, (x, y), img)
+        x = (TAMANHO_TELA - nova_largura) // 2
 
-        nome_saida = os.path.splitext(arquivo)[0].lower() + ".png"
-        tela.save(os.path.join(SAIDA, nome_saida))
+        # Mantém o produto próximo da base, sem encostar.
+        y = TAMANHO_TELA - nova_altura - MARGEM
 
-        print("OK:", nome_saida)
+        tela.alpha_composite(imagem, (x, y))
 
-    except Exception as e:
-        print("ERRO:", arquivo)
-        print(e)
+        nome_saida = arquivo.stem.lower() + ".png"
+        caminho_saida = PASTA_SAIDA / nome_saida
 
-print("Pronto! Imagens recortadas e ampliadas.")
+        tela.save(
+            caminho_saida,
+            format="PNG",
+            optimize=True
+        )
+
+        print(f"OK: {nome_saida}\n")
+
+    except Exception as erro:
+        print(f"ERRO em {arquivo.name}: {erro}\n")
+
+print("Processamento concluído.")
+
