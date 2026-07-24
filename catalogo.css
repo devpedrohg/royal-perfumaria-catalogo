@@ -207,12 +207,16 @@ body{
 }
 
 /* GRID E CARD */
-.produtos-grid{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:32px;
+.grid-produtos{
+    max-width:1500px;
     width:100%;
-    align-items:stretch;
+    margin:0 auto 60px;
+    padding:0 30px;
+
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+
+    gap:30px;
 }
 
 .card-produto{
