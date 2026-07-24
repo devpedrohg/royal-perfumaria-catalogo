@@ -3,12 +3,12 @@
     padding:0;
     box-sizing:border-box;
 }
-
 body{
     background:#000;
     color:#fff;
     font-family:'Montserrat', sans-serif;
     overflow-x:hidden;
+    padding-top:82px;
 }
 
 /* TOPO */
@@ -111,7 +111,7 @@ body{
 
 .hero-catalogo{
     width:100%;
-    margin-top:82px;
+    margin-top:0px;
     line-height:0;
 }
 
@@ -888,7 +888,6 @@ body{
 .hero-catalogo{
     width:100%;
     height:420px;
-    margin-top:82px;
     overflow:hidden;
     background:#000;
 }
@@ -904,7 +903,7 @@ body{
 
     .hero-catalogo{
         height:220px;
-        margin-top:72px;
+        
     }
 
     .hero-catalogo img{
