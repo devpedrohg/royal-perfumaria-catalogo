@@ -2469,3 +2469,213 @@ footer {
     }
 
 }
+.categorias-modernas{
+    width:min(1400px, calc(100% - 48px));
+    margin:70px auto;
+}
+
+.cabecalho-categorias{
+    margin-bottom:32px;
+}
+
+.categoria-destaque{
+    display:block;
+    margin-bottom:9px;
+    color:#d6a936;
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:3px;
+}
+
+.cabecalho-categorias h2{
+    margin:0;
+    color:#fff;
+    font-size:clamp(1.8rem, 3vw, 2.7rem);
+    line-height:1.1;
+}
+
+.cabecalho-categorias p{
+    margin:12px 0 0;
+    color:#929292;
+    font-size:.96rem;
+}
+
+.grid-categorias-modernas{
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:18px;
+}
+
+.card-categoria-moderna{
+    position:relative;
+    min-height:185px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:24px;
+    overflow:hidden;
+    text-decoration:none;
+    color:#fff;
+    border:1px solid rgba(214,169,54,.22);
+    border-radius:24px;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(214,169,54,.1),
+            transparent 42%
+        ),
+        linear-gradient(145deg, #111, #070707);
+    box-shadow:0 18px 50px rgba(0,0,0,.22);
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.card-categoria-moderna::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:0;
+    background:linear-gradient(
+        135deg,
+        transparent,
+        rgba(214,169,54,.08)
+    );
+    transition:opacity .3s ease;
+}
+
+.card-categoria-moderna:hover{
+    transform:translateY(-7px);
+    border-color:rgba(214,169,54,.75);
+    box-shadow:
+        0 24px 60px rgba(0,0,0,.38),
+        0 0 30px rgba(214,169,54,.09);
+}
+
+.card-categoria-moderna:hover::before{
+    opacity:1;
+}
+
+.icone-categoria{
+    position:relative;
+    z-index:1;
+    width:52px;
+    height:52px;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(214,169,54,.32);
+    border-radius:16px;
+    background:rgba(214,169,54,.06);
+    transition:
+        transform .3s ease,
+        background .3s ease;
+}
+
+.icone-categoria svg{
+    width:26px;
+    height:26px;
+    fill:none;
+    stroke:#d6a936;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.card-categoria-moderna:hover .icone-categoria{
+    transform:translateY(-3px) scale(1.06);
+    background:rgba(214,169,54,.12);
+}
+
+.texto-categoria{
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    padding-right:30px;
+}
+
+.texto-categoria strong{
+    color:#fff;
+    font-size:1.05rem;
+    letter-spacing:.3px;
+    transition:color .3s ease;
+}
+
+.texto-categoria span{
+    color:#858585;
+    font-size:.78rem;
+}
+
+.card-categoria-moderna:hover .texto-categoria strong{
+    color:#e7bd4f;
+}
+
+.seta-categoria{
+    position:absolute;
+    right:24px;
+    bottom:23px;
+    z-index:1;
+    color:#d6a936;
+    font-size:1.4rem;
+    transition:transform .3s ease;
+}
+
+.card-categoria-moderna:hover .seta-categoria{
+    transform:translateX(5px);
+}
+
+.card-categoria-moderna.promocao{
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(214,169,54,.2),
+            transparent 48%
+        ),
+        linear-gradient(145deg, #171207, #080705);
+}
+
+@media(max-width:1050px){
+    .grid-categorias-modernas{
+        grid-template-columns:repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media(max-width:760px){
+    .categorias-modernas{
+        width:min(100% - 28px, 1400px);
+        margin:50px auto;
+    }
+
+    .grid-categorias-modernas{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        gap:12px;
+    }
+
+    .card-categoria-moderna{
+        min-height:165px;
+        padding:18px;
+        border-radius:20px;
+    }
+
+    .icone-categoria{
+        width:46px;
+        height:46px;
+    }
+
+    .seta-categoria{
+        right:18px;
+        bottom:18px;
+    }
+}
+
+@media(max-width:420px){
+    .texto-categoria span{
+        display:none;
+    }
+
+    .card-categoria-moderna{
+        min-height:145px;
+    }
+}

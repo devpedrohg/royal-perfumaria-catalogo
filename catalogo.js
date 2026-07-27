@@ -1,3 +1,15 @@
+const parametrosUrl = new URLSearchParams(window.location.search);
+const categoriaUrl = parametrosUrl.get("categoria");
+
+if (categoriaUrl) {
+    const selectCategoria = document.getElementById("categoria");
+
+    if (selectCategoria) {
+        selectCategoria.value = categoriaUrl;
+        selectCategoria.dispatchEvent(new Event("change"));
+    }
+}
+
 const elementos = {
     grid: document.getElementById("gridProdutos"),
     busca: document.getElementById("campoBusca"),
