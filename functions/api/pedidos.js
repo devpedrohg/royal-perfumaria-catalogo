@@ -21,14 +21,14 @@ export async function onRequestPost({ request, env }) {
         )
         VALUES (?, ?, ?, ?, ?, ?)
     `)
-    .bind(
-        pedido.cliente,
-        pedido.telefone,
-        pedido.endereco,
-        JSON.stringify(pedido.produtos),
-        pedido.total,
-        "Novo"
-    )
+.bind(
+    pedido.cliente.nome,
+    pedido.cliente.telefone,
+    pedido.endereco,
+    JSON.stringify(pedido.itens),
+    pedido.total,
+    "Novo"
+)
     .run();
 
     return Response.json({
