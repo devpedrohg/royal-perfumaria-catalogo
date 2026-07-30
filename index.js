@@ -73,7 +73,44 @@ if (heroSlider) {
    CEP
 ===================================================== */
 
-window.salvarCep = function salvarCep() {
+function salvarCep() {
+    const cepInput = document.getElementById("cepInput");
+    const cepTexto = document.getElementById("cepTexto");
+
+    if (!cepInput || !cepTexto) return;
+
+    const cep = cepInput.value.replace(/\D/g, "");
+
+if (cep.length !== 8) {
+    alert("Digite um CEP válido com 8 números.");
+    return;
+}
+const cepFormatado =
+    cep.slice(0, 5) + "-" + cep.slice(5);
+
+localStorage.setItem("cepRoyal", cepFormatado);
+cepTexto.textContent = cepFormatado;
+
+const cepSalvo = localStorage.getItem("cepRoyal");
+
+if (cepSalvo) {
+    const cepTexto = document.getElementById("cepTexto");
+
+    if (cepTexto) {
+        cepTexto.textContent = cepSalvo;
+    }
+} else {
+    abrirModalCep();
+}
+
+document.querySelector(".barra-cep")?.addEventListener("click", abrirModalCep);
+
+    // Fecha o modal, se existir
+    if (typeof fecharModalCep === "function") {
+        fecharModalCep();
+    }
+}
+function salvarCep() {
     const cepInput = document.getElementById("cepInput");
     const cepTexto = document.getElementById("cepTexto");
 
@@ -81,14 +118,20 @@ window.salvarCep = function salvarCep() {
 
     const cep = cepInput.value.trim();
 
-    if (!cep) {
+    if (cep === "") {
         alert("Digite um CEP válido.");
         return;
     }
 
-    cepTexto.textContent = cep;
-};
+    localStorage.setItem("cepRoyal", cep);
 
+    cepTexto.textContent = cep;
+
+    // Fecha o modal, se existir
+    if (typeof fecharModalCep === "function") {
+        fecharModalCep();
+    }
+}
 
 /* =====================================================
    FUNÇÕES AUXILIARES

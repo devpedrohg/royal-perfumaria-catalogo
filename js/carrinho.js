@@ -48,7 +48,6 @@ function formatarMoeda(valor) {
 /* =====================================================
    ADICIONAR PRODUTO
 ===================================================== */
-
 function adicionarCarrinho(produto) {
     if (!produto || !produto.nome) {
         console.error("Produto inválido:", produto);
@@ -63,8 +62,7 @@ function adicionarCarrinho(produto) {
     );
 
     if (existente) {
-        existente.quantidade =
-            (Number(existente.quantidade) || 0) + quantidade;
+        existente.quantidade += quantidade;
     } else {
         carrinho.push({
             nome: produto.nome,
@@ -77,7 +75,6 @@ function adicionarCarrinho(produto) {
     salvarCarrinho(carrinho);
     atualizarCarrinho();
 }
-
 /* =====================================================
    DIMINUIR PELO NOME
    Usado no index e no catálogo

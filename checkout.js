@@ -23,7 +23,15 @@
         complemento: document.getElementById("complemento"),
         pagamento: document.getElementById("pagamento"),
         observacao: document.getElementById("observacao")
-    };
+    }
+    const cepSalvo = localStorage.getItem("cepRoyal");
+
+if (cepSalvo && elementos.cep) {
+    elementos.cep.value = cepSalvo;
+
+    // Busca automaticamente o endereço
+    buscarCep();
+}
 
     function pegarCarrinho() {
         try {

@@ -1,0 +1,195 @@
+/* =========================================================
+   ROYAL PERFUMARIA — HERO PREMIUM
+   Carregue este arquivo depois de style.css
+   ========================================================= */
+
+.hero-slider{
+    position:relative;
+    width:100%;
+    height:620px;
+    margin-top:82px;
+    overflow:hidden;
+    background:#000;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .7s ease, visibility .7s ease;
+}
+
+.slide.ativo{
+    opacity:1;
+    visibility:visible;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    object-position:center;
+    transform:scale(1);
+    transition:transform 8s linear;
+}
+
+.slide.ativo img{
+    transform:scale(1.08);
+}
+
+.slide::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(90deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.78) 28%,rgba(0,0,0,.42) 55%,rgba(0,0,0,0) 100%);
+}
+
+.slide-texto{
+    position:absolute;
+    z-index:2;
+    top:50%;
+    left:8%;
+    width:min(600px, 82%);
+    padding:50px;
+    transform:translateY(-50%);
+    border:1px solid rgba(212,175,55,.15);
+    border-radius:26px;
+    background:rgba(0,0,0,.28);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+    animation:entradaHero .8s ease;
+}
+
+.slide-texto span{
+    display:block;
+    margin-bottom:14px;
+    color:#d4af37;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+.slide-texto h1{
+    margin-bottom:20px;
+    color:#fff;
+    font-size:clamp(42px, 5vw, 60px);
+    font-weight:800;
+    line-height:1.05;
+}
+
+.slide-texto p{
+    margin-bottom:30px;
+    color:#d9d9d9;
+    font-size:19px;
+    line-height:1.8;
+    text-shadow:0 2px 12px rgba(0,0,0,.7);
+}
+
+.btn-catalogo{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:210px;
+    height:58px;
+    padding:0 36px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#caa74a,#f2d87d);
+    box-shadow:0 0 25px rgba(212,175,55,.18);
+    color:#000;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:2px;
+    text-decoration:none;
+    text-transform:uppercase;
+    transition:transform .3s ease, box-shadow .3s ease, background .3s ease;
+}
+
+.btn-catalogo:hover{
+    transform:translateY(-3px) scale(1.02);
+    background:linear-gradient(135deg,#d8b85a,#ffe59a);
+    box-shadow:0 12px 32px rgba(212,175,55,.3);
+}
+
+.slide-btn{
+    position:absolute;
+    z-index:20;
+    top:50%;
+    width:58px;
+    height:58px;
+    transform:translateY(-50%);
+    border:1px solid rgba(212,175,55,.55);
+    border-radius:50%;
+    background:rgba(0,0,0,.5);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+    color:#d4af37;
+    font-size:36px;
+    line-height:1;
+    cursor:pointer;
+    transition:transform .25s ease, background .25s ease, color .25s ease;
+}
+
+.slide-btn:hover{
+    transform:translateY(-50%) scale(1.08);
+    background:#d4af37;
+    color:#000;
+}
+
+.slide-btn.prev{left:28px;}
+.slide-btn.next{right:28px;}
+
+.slide-dots{
+    position:absolute;
+    z-index:20;
+    bottom:24px;
+    left:50%;
+    display:flex;
+    gap:10px;
+    transform:translateX(-50%);
+}
+
+.dot{
+    width:32px;
+    height:4px;
+    padding:0;
+    border:0;
+    border-radius:999px;
+    background:rgba(255,255,255,.4);
+    cursor:pointer;
+    transition:width .3s ease, background .3s ease;
+}
+
+.dot.ativo{
+    width:52px;
+    background:#d4af37;
+}
+
+@keyframes entradaHero{
+    from{opacity:0;transform:translateY(-50%) translateX(-35px);}
+    to{opacity:1;transform:translateY(-50%) translateX(0);}
+}
+
+@media(max-width:900px){
+    .hero-slider{height:520px;margin-top:72px;}
+    .slide-texto{left:5%;width:min(560px, 88%);padding:36px;}
+    .slide-texto p{font-size:16px;}
+}
+
+@media(max-width:600px){
+    .hero-slider{height:470px;}
+    .slide::after{background:linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.58));}
+    .slide-texto{left:18px;width:calc(100% - 36px);padding:26px 22px;border-radius:20px;}
+    .slide-texto span{font-size:10px;letter-spacing:2px;}
+    .slide-texto h1{font-size:30px;}
+    .slide-texto p{margin-bottom:22px;font-size:14px;line-height:1.55;}
+    .btn-catalogo{min-width:0;width:100%;height:50px;padding:0 18px;border-radius:12px;font-size:11px;letter-spacing:1.2px;}
+    .slide-btn{width:38px;height:38px;font-size:27px;}
+    .slide-btn.prev{left:8px;}
+    .slide-btn.next{right:8px;}
+    .slide-dots{bottom:15px;}
+    .dot{width:22px;}
+    .dot.ativo{width:38px;}
+}

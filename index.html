@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Royal Perfumaria</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="hero.css">
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="categorias.css">
+
+
   
 </head>
 
@@ -21,6 +26,18 @@
     <a href="#">Femininos</a>
     <a href="/catalogo.html">Catálogo</a>
     </nav>
+
+    <button
+    class="btn-menu"
+    id="btnMenu"
+    type="button"
+    aria-label="Abrir menu">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+</button>
 
   <div class="icones">
 
@@ -70,6 +87,22 @@
 </div>
   </header>
 
+<nav class="menu-mobile" id="menuMobile">
+
+    <a href="index.html">Início</a>
+
+    <a href="catalogo.html">Catálogo</a>
+
+    <a href="catalogo.html?categoria=masculino">Masculinos</a>
+
+    <a href="catalogo.html?categoria=feminino">Femininos</a>
+
+    <a href="catalogo.html?categoria=promocoes">Promoções</a>
+
+</nav>
+
+<div class="overlay-menu" id="overlayMenu"></div>
+
 <section class="cep-bar">
   <div class="cep-info">
     <span class="cep-icon">
@@ -91,7 +124,7 @@
 
   <div class="cep-form">
     <input type="text" id="cepInput" placeholder="Digite seu CEP">
-    <button onclick="salvarCep()">Confirmar</button>
+    <button onclick="Cep()">Confirmar</button>
   </div>
 </section>
 
@@ -410,19 +443,6 @@
 
 </footer>
 
-<script>
-  function salvarCep() {
-    const cepInput = document.getElementById("cepInput");
-    const cepTexto = document.getElementById("cepTexto");
-
-    if (cepInput.value.trim() === "") {
-      alert("Digite um CEP válido.");
-      return;
-    }
-
-    cepTexto.textContent = cepInput.value;
-  }
-</script>
 <div class="modal-carrinho" id="modalCarrinho">
 
     <div class="modal-box">
@@ -451,6 +471,69 @@
     </div>
 
 </div>
+
+<script>
+const topo = document.querySelector(".topo");
+const btnMenu = document.getElementById("btnMenu");
+const menuMobile = document.getElementById("menuMobile");
+const overlayMenu = document.getElementById("overlayMenu");
+
+window.addEventListener("scroll", () => {
+    topo?.classList.toggle("rolagem", window.scrollY > 30);
+});
+
+if (btnMenu && menuMobile && overlayMenu) {
+
+    function fecharMenuMobile() {
+        btnMenu.classList.remove("ativo");
+        menuMobile.classList.remove("ativo");
+        overlayMenu.classList.remove("ativo");
+        document.body.style.overflow = "";
+    }
+
+    btnMenu.addEventListener("click", () => {
+        const aberto = menuMobile.classList.toggle("ativo");
+
+        btnMenu.classList.toggle("ativo", aberto);
+        overlayMenu.classList.toggle("ativo", aberto);
+
+        document.body.style.overflow = aberto ? "hidden" : "";
+    });
+
+    overlayMenu.addEventListener("click", fecharMenuMobile);
+
+    menuMobile.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", fecharMenuMobile);
+    });
+
+}
+
+window.addEventListener("scroll", () => {
+    topo.classList.toggle("rolagem", window.scrollY > 30);
+});
+
+function fecharMenuMobile() {
+    btnMenu.classList.remove("ativo");
+    menuMobile.classList.remove("ativo");
+    overlayMenu.classList.remove("ativo");
+    document.body.style.overflow = "";
+}
+
+btnMenu.addEventListener("click", () => {
+    const aberto = menuMobile.classList.toggle("ativo");
+
+    btnMenu.classList.toggle("ativo", aberto);
+    overlayMenu.classList.toggle("ativo", aberto);
+
+    document.body.style.overflow = aberto ? "hidden" : "";
+});
+
+overlayMenu.addEventListener("click", fecharMenuMobile);
+
+menuMobile.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", fecharMenuMobile);
+});
+</script>
 
 <script src="produtos.js"></script>
 <script src="js/carrinho.js"></script>

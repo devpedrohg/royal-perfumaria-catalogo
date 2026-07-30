@@ -595,21 +595,24 @@ textarea::placeholder{
 
     @media (max-width:900px){
 
+    
     .checkout-container{
         width:calc(100% - 24px);
         margin:22px auto 40px;
 
-        display:grid;
-        grid-template-columns:1fr 1fr;
+        display:flex;
+        flex-direction: column;
         gap:16px;
         align-items:start;
     }
 
     .dados-cliente{
+        width: 100%;
         order:1;
     }
 
     .resumo-pedido{
+        width: 100%;
         order:2;
         position:sticky;
         top:90px;

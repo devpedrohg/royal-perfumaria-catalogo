@@ -1,0 +1,425 @@
+/* =========================================================
+   ROYAL PERFUMARIA — HEADER PREMIUM
+   ========================================================= */
+
+.topo{
+    width:100%;
+    height:82px;
+    padding:0 5%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:9999;
+
+    background:rgba(5,5,5,.72);
+
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(212,175,55,.14);
+
+    transition:
+        background .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.topo.rolagem{
+    background:rgba(5,5,5,.94);
+    border-bottom-color:rgba(212,175,55,.28);
+    box-shadow:0 15px 45px rgba(0,0,0,.4);
+}
+
+/* LOGO */
+
+.logo{
+    display:flex;
+    align-items:center;
+    flex-shrink:0;
+}
+
+.logo img{
+    width:110px;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    transition:transform .3s ease;
+}
+
+.logo img:hover{
+    transform:scale(1.04);
+}
+
+/* MENU DESKTOP */
+
+.menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:34px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.menu a{
+    position:relative;
+
+    color:#f5f5f5;
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1.3px;
+    text-transform:uppercase;
+
+    transition:color .25s ease;
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+
+    left:0;
+    bottom:-9px;
+
+    width:0;
+    height:2px;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+        90deg,
+        #c69b2d,
+        #f0d77a
+    );
+
+    transition:width .3s ease;
+}
+
+.menu a:hover{
+    color:#d4af37;
+}
+
+.menu a:hover::after{
+    width:100%;
+}
+
+/* ÍCONES */
+
+.icones{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-shrink:0;
+}
+
+.top-icon,
+.btn-carrinho{
+    width:44px;
+    height:44px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    border:1px solid rgba(212,175,55,.24);
+    border-radius:50%;
+
+    background:rgba(255,255,255,.025);
+
+    color:#fff;
+    text-decoration:none;
+
+    cursor:pointer;
+
+    transition:
+        transform .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+}
+
+.top-icon svg,
+.btn-carrinho svg{
+    width:19px;
+    height:19px;
+}
+
+.top-icon:hover,
+.btn-carrinho:hover{
+    transform:translateY(-2px);
+
+    color:#d4af37;
+
+    border-color:rgba(212,175,55,.75);
+
+    background:rgba(212,175,55,.07);
+
+    box-shadow:0 8px 22px rgba(0,0,0,.28);
+}
+
+/* CONTADOR DO CARRINHO */
+
+.btn-carrinho{
+    position:relative;
+    padding:0;
+}
+
+.contador-carrinho{
+    position:absolute;
+
+    top:-5px;
+    right:-5px;
+    left:auto;
+
+    min-width:18px;
+    height:18px;
+
+    padding:0 5px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:2px solid #050505;
+    border-radius:999px;
+
+    background:linear-gradient(
+        135deg,
+        #f3db82,
+        #c99a25
+    );
+
+    color:#080808;
+
+    font-size:10px;
+    font-weight:900;
+}
+
+/* BOTÃO MOBILE */
+
+.btn-menu{
+    display:none;
+
+    width:44px;
+    height:44px;
+
+    padding:0;
+
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+
+    border:1px solid rgba(212,175,55,.24);
+    border-radius:50%;
+
+    background:rgba(255,255,255,.025);
+
+    cursor:pointer;
+
+    transition:.25s ease;
+}
+
+.btn-menu span{
+    width:20px;
+    height:2px;
+
+    display:block;
+
+    border-radius:999px;
+
+    background:#d4af37;
+
+    transition:
+        transform .3s ease,
+        opacity .3s ease;
+}
+
+.btn-menu.ativo span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+
+.btn-menu.ativo span:nth-child(2){
+    opacity:0;
+}
+
+.btn-menu.ativo span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+}
+
+/* MENU MOBILE */
+
+.menu-mobile{
+    position:fixed;
+
+    top:0;
+    left:-310px;
+
+    width:min(300px, 84vw);
+    height:100vh;
+
+    padding:110px 30px 40px;
+
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(212,175,55,.09),
+            transparent 35%
+        ),
+        #080808;
+
+    border-right:1px solid rgba(212,175,55,.2);
+
+    box-shadow:20px 0 60px rgba(0,0,0,.55);
+
+    z-index:10001;
+
+    transition:left .35s ease;
+}
+
+.menu-mobile.ativo{
+    left:0;
+}
+
+.menu-mobile a{
+    padding:14px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+    color:#f2f2f2;
+    text-decoration:none;
+
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+
+    transition:
+        color .25s ease,
+        padding-left .25s ease;
+}
+
+.menu-mobile a:hover{
+    color:#d4af37;
+    padding-left:8px;
+}
+
+/* OVERLAY */
+
+.overlay-menu{
+    position:fixed;
+    inset:0;
+
+    opacity:0;
+    visibility:hidden;
+
+    background:rgba(0,0,0,.64);
+
+    -webkit-backdrop-filter:blur(4px);
+    backdrop-filter:blur(4px);
+
+    z-index:10000;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease;
+}
+
+.overlay-menu.ativo{
+    opacity:1;
+    visibility:visible;
+}
+
+/* TABLET */
+
+@media(max-width:1050px){
+
+    .menu{
+        gap:22px;
+    }
+
+    .menu a{
+        font-size:12px;
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .topo{
+        height:72px;
+        padding:0 14px;
+        gap:10px;
+    }
+
+    .btn-menu{
+        display:flex;
+    }
+
+    .menu{
+        display:none;
+    }
+
+    .logo{
+        margin-right:auto;
+    }
+
+    .logo img{
+        width:82px;
+    }
+
+    .icones{
+        gap:7px;
+    }
+
+    .top-icon,
+    .btn-carrinho,
+    .btn-menu{
+        width:40px;
+        height:40px;
+    }
+
+    .top-icon svg,
+    .btn-carrinho svg{
+        width:18px;
+        height:18px;
+    }
+
+}
+
+/* CELULARES PEQUENOS */
+
+@media(max-width:390px){
+
+    .topo{
+        padding:0 10px;
+    }
+
+    .logo img{
+        width:72px;
+    }
+
+    .top-icon,
+    .btn-carrinho,
+    .btn-menu{
+        width:37px;
+        height:37px;
+    }
+
+}

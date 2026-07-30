@@ -1,14 +1,5 @@
-const parametrosUrl = new URLSearchParams(window.location.search);
-const categoriaUrl = parametrosUrl.get("categoria");
-
-if (categoriaUrl) {
-    const selectCategoria = document.getElementById("categoria");
-
-    if (selectCategoria) {
-        selectCategoria.value = categoriaUrl;
-        selectCategoria.dispatchEvent(new Event("change"));
-    }
-}
+(() => {
+    "use strict";
 
 const elementos = {
     grid: document.getElementById("gridProdutos"),
@@ -23,10 +14,11 @@ const elementos = {
     irCheckout: document.getElementById("irCheckout")
 };
 
-const parametrosUrl = new URLSearchParams(window.location.search);
+const parametrosProdutos =
+    new URLSearchParams(window.location.search);
 
 const categoriaUrl =
-    parametrosUrl.get("categoria") || "todos";
+    parametrosProdutos.get("categoria") || "todos";
 
 const categoriasPermitidas = [
     "todos",
@@ -44,7 +36,12 @@ const estado = {
         ? categoriaUrl
         : "todos"
 };
-
+elementos?.filtros?.forEach((botao) => {
+    botao.classList.toggle(
+        "ativo",
+        botao.dataset.categoria === estado.categoria
+    );
+});
 function converterPreco(preco) {
     return Number(
         String(preco)
@@ -285,7 +282,6 @@ function obterProdutosFiltrados() {
 
     return ordenarProdutos(lista);
 }
-
 function atualizarCatalogo() {
     renderizarProdutos(obterProdutosFiltrados());
 }
@@ -295,12 +291,7 @@ function configurarFiltros() {
         const categoria =
             filtro.dataset.categoria || "todos";
 
-        filtro.classList.toggle(
-            "ativo",
-            categoria === estado.categoria
-        );
-
-        filtro.addEventListener("click", () => {
+           filtro.addEventListener("click", () => {
             elementos.filtros.forEach((botao) => {
                 botao.classList.remove("ativo");
             });
@@ -366,9 +357,10 @@ function iniciarCatalogo() {
         atualizarCatalogo
     );
 
+
     configurarFiltros();
     configurarModal();
     atualizarCatalogo();
 }
-
-iniciarCatalogo();
+    iniciarCatalogo();
+    })();

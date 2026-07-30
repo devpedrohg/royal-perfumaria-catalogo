@@ -7,6 +7,20 @@ export async function onRequestGet({ env }) {
 }
 
 export async function onRequestPost({ request, env }) {
+    try {
+        } catch (erro) {
+    console.error("Erro ao salvar pedido:", erro);
+
+    return Response.json(
+        {
+            sucesso: false,
+            erro: "Erro ao salvar o pedido."
+        },
+        {
+            status: 500
+        }
+    );
+}
     const pedido = await request.json();
 
     await env.DB.prepare(`
