@@ -6,12 +6,10 @@ export async function onRequestGet({ env }) {
 
         return Response.json(results || []);
     } catch (erro) {
-        console.error("Erro ao buscar pedidos:", erro);
-
         return Response.json(
             {
                 sucesso: false,
-                erro: erro.message || "Erro ao buscar os pedidos."
+                erro: erro.message
             },
             {
                 status: 500
@@ -25,6 +23,7 @@ export async function onRequestPost({ request, env }) {
         const pedido = await request.json();
 
         if (
+            !pedido?.codigo ||
             !pedido?.cliente?.nome ||
             !pedido?.cliente?.telefone ||
             !pedido?.endereco ||
@@ -42,33 +41,46 @@ export async function onRequestPost({ request, env }) {
             );
         }
 
-        await env.DB
-            .prepare(`
-                INSERT INTO pedidos
-                (
-                    cliente,
-                    telefone,
-                    endereco,
-                    produtos,
-                    total,
-                    status
-                )
-                VALUES (?, ?, ?, ?, ?, ?)
-            `)
-            .bind(
-                pedido.cliente.nome,
-                pedido.cliente.telefone,
-                pedido.endereco,
-                JSON.stringify(pedido.itens),
-                Number(pedido.total) || 0,
-                "Novo"
+        await env.DB.prepare(`
+            INSERT INTO pedidos
+            (
+                codigo,
+                cliente_nome,
+                telefone,
+                cep,
+                endereco,
+                cidade,
+                uf,
+                complemento,
+                pagamento,
+                observacao,
+                produtos,
+                total,
+                status
             )
-            .run();
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `)
+        .bind(
+            pedido.codigo,
+            pedido.cliente.nome,
+            pedido.cliente.telefone,
+            pedido.cep || "",
+            pedido.endereco,
+            pedido.cidade || "",
+            pedido.uf || "",
+            pedido.complemento || "",
+            pedido.pagamento || "",
+            pedido.observacao || "",
+            JSON.stringify(pedido.itens),
+            Number(pedido.total) || 0,
+            "novo"
+        )
+        .run();
 
         return Response.json(
             {
                 sucesso: true,
-                codigo: pedido.codigo || null
+                codigo: pedido.codigo
             },
             {
                 status: 201
