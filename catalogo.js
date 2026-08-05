@@ -17,8 +17,21 @@ const elementos = {
 const parametrosProdutos =
     new URLSearchParams(window.location.search);
 
+const aliasesCategorias = {
+    masculinos: "masculino",
+    femininos: "feminino",
+    promocao: "promocoes",
+    promoções: "promocoes"
+};
+
+const categoriaRecebida = String(
+    parametrosProdutos.get("categoria") || "todos"
+)
+    .toLowerCase()
+    .trim();
+
 const categoriaUrl =
-    parametrosProdutos.get("categoria") || "todos";
+    aliasesCategorias[categoriaRecebida] || categoriaRecebida;
 
 const categoriasPermitidas = [
     "todos",
@@ -275,7 +288,9 @@ function obterProdutosFiltrados() {
 
         const correspondeCategoria =
             estado.categoria === "todos" ||
-            produto.filtro === estado.categoria;
+            String(produto.filtro || "")
+    .toLowerCase()
+    .trim() === estado.categoria;
 
         return correspondeBusca && correspondeCategoria;
     });
@@ -286,6 +301,12 @@ function atualizarCatalogo() {
     renderizarProdutos(obterProdutosFiltrados());
 }
 
+elementos.filtros.forEach((botao) => {
+    botao.classList.toggle(
+        "ativo",
+        botao.dataset.categoria === estado.categoria
+    );
+});
 function configurarFiltros() {
     elementos.filtros.forEach((filtro) => {
         const categoria =
