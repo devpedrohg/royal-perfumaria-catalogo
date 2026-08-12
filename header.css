@@ -72,15 +72,18 @@
     font-size:13px;
     font-weight:700;
     letter-spacing:1.3px;
-    text-transform: capitalize;
+    text-transform:capitalize;
 
     transition:color .25s ease;
+}
+
+.menu a:hover{
+    color:#d4af37;
 }
 
 .menu a::after{
     content:"";
     position:absolute;
-
     left:0;
     bottom:-9px;
 
@@ -98,13 +101,10 @@
     transition:width .3s ease;
 }
 
-.menu a:hover{
-    color:#d4af37;
-}
-
 .menu a:hover::after{
     width:100%;
 }
+
 
 /* ÍCONES */
 
@@ -364,15 +364,22 @@
         gap:10px;
     }
 
-    .btn-menu{
-        display:flex;
-    }
-
     .menu{
         display:none;
     }
 
+    /* HAMBÚRGUER PRIMEIRO */
+    .btn-menu{
+        order:1;
+        display:flex;
+        position:relative;
+        z-index:10002;
+        margin:0;
+    }
+
+    /* LOGO DEPOIS */
     .logo{
+        order:2;
         margin-right:auto;
     }
 
@@ -380,7 +387,9 @@
         width:82px;
     }
 
+    /* ÍCONES À DIREITA */
     .icones{
+        order:3;
         gap:7px;
     }
 
@@ -396,7 +405,6 @@
         width:18px;
         height:18px;
     }
-
 }
 
 /* CELULARES PEQUENOS */
