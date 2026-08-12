@@ -531,32 +531,6 @@ if (btnMenu && menuMobile && overlayMenu) {
     });
 
 }
-
-window.addEventListener("scroll", () => {
-    topo.classList.toggle("rolagem", window.scrollY > 30);
-});
-
-function fecharMenuMobile() {
-    btnMenu.classList.remove("ativo");
-    menuMobile.classList.remove("ativo");
-    overlayMenu.classList.remove("ativo");
-    document.body.style.overflow = "";
-}
-
-btnMenu.addEventListener("click", () => {
-    const aberto = menuMobile.classList.toggle("ativo");
-
-    btnMenu.classList.toggle("ativo", aberto);
-    overlayMenu.classList.toggle("ativo", aberto);
-
-    document.body.style.overflow = aberto ? "hidden" : "";
-});
-
-overlayMenu.addEventListener("click", fecharMenuMobile);
-
-menuMobile.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", fecharMenuMobile);
-});
 </script>
 
 <script src="produtos.js"></script>
